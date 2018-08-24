@@ -86,3 +86,7 @@ extern shellcmd xsh_message_example(int, char *[]);
 extern shellcmd xsh_arg_example(int, char*[]);
 extern shellcmd xsh_fstest(int nargs, char *args[]);
 
+
+/* in file xsh_hello.c */
+extern  shellcmd xsh_hello 	(int, char *[]);
+
