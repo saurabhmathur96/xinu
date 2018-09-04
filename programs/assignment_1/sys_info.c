@@ -113,6 +113,7 @@ int main(int argc, char *argv[])
             printf("Error executing shell command provided.\n");
             return EXIT_FAILURE;
         }
+        return EXIT_SUCCESS;
         
     } 
     
