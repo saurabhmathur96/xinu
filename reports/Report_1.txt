@@ -1,0 +1,37 @@
+Q. What is Orphan and Zombie processes?
+A. When a parent process calls wait(), the process waits for its children to 
+finish execution. Then, the entries of the terminated child processes are 
+removed from the Operating System's process table. If a child process 
+terminates before its parent has called wait(), the child process will still 
+have an entry in the process table - even though its resources have been 
+deallocated. Such a process is called a Zombie process[1,2].
+
+If the parent process terminates before its child process, without calling 
+wait(), the child process now does not have a parent process. Such a process 
+is called an Orphan process. In Unix-like operating systems, orphan processes 
+are reassigned as the children of the init process[1,3]. 
+
+Q. What are the changes that occur when the child process calls the exec 
+system call to execute a new program?
+A. When a child process calls the exec system call, the Operating System
+loads the executable whose path is passed with the exec call, replacing the 
+entire memory space of the child process. If there is an error loading and 
+running the executable, only then will the control return to the original
+child process code. If there are no errors, the child process will terminate 
+when the executable terminates[1].
+
+"The  exec() family of functions replaces the current process image with
+a new process image."[4]
+
+"execve()  does  not  return on success, and the text, initialized data,
+uninitialized data (bss), and stack of the calling  process  are  over‐
+written according to the contents of the newly loaded program."[4]
+
+References
+[1] Silberschatz, A., Galvin, P.B. & Gagne, G. (2012). Operating System 
+Concepts, 9th Edition. Wiley Global Education
+[2] Z. (n.d.). Retrieved September 3, 2018, from 
+https://www.tldp.org/LDP/Linux-Dictionary/html/z.html 
+[3] O. (n.d.). Retrieved September 3, 2018, from 
+https://www.tldp.org/LDP/Linux-Dictionary/html/o.html 
+[4] EXEC(3) Linux Programmer's Manual

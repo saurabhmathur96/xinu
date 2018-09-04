@@ -17,7 +17,7 @@ shellcmd xsh_hello(int nargs, char *args[])
         return SHELL_ERROR;
     }
 
-    printf("Hello %s, Welcome to the world of Xinu!!", args[1]);
+    printf("Hello %s, Welcome to the world of Xinu!!\n", args[1]);
 
     return SHELL_OK;
 }
