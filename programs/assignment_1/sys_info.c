@@ -11,9 +11,15 @@ int main(int argc, char *argv[])
 
     if (argc < 2)
     {
-        printf("Too few arguments. Usage: sys_info <shell_command>\n");
+        printf("Too few arguments. Usage: sys_info /path/to/shell_command\n");
         return EXIT_FAILURE;
     }
+    else if (argc > 2)
+    {
+        printf("Too many arguments. Usage: sys_info /path/to/shell_command\n");
+        return EXIT_FAILURE;
+    }
+
     // Create a pipe
     int file_descriptors[2], return_value;
     return_value = pipe(file_descriptors);
@@ -49,6 +55,7 @@ int main(int argc, char *argv[])
 
         close(write_end); // close write end from parent
 
+        // Wait for child process to terminate
         int status;
         wait(&status);
         if (!WIFEXITED(status))
