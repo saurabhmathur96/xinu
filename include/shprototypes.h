@@ -90,3 +90,5 @@ extern shellcmd xsh_fstest(int nargs, char *args[]);
 /* in file xsh_hello.c */
 extern  shellcmd xsh_hello 	(int, char *[]);
 
+/* in file xsh_prodcons.c */
+extern shellcmd xsh_prodcons(int nargs, char *args[]);
