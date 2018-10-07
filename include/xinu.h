@@ -41,4 +41,7 @@
 #include <am335x_eth.h>
 #include <armv7a.h>
 
+#include <linked_queue.h>
+#include <future.h>
+
 #endif
