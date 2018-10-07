@@ -30,7 +30,7 @@ syscall future_get(future_t* f, int* value)
     if (f->state == FUTURE_READY)
     {
         // currently set value is available for use
-        value = f->value;
+        *value = f->value;
     }
     else if (f->state == FUTURE_EMPTY)
     {
@@ -45,7 +45,7 @@ syscall future_get(future_t* f, int* value)
 
 
         // on wakeup
-        value = f->value;
+        *value = f->value;
     }
     else if (f->state == FUTURE_WAITING)
     {
@@ -63,7 +63,7 @@ syscall future_get(future_t* f, int* value)
 		resched();			/*   and reschedule	*/
 
         // wakeup
-        value = f->value;
+        *value = f->value;
     }
     
     if (f->mode == FUTURE_QUEUE)
