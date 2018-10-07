@@ -58,7 +58,13 @@ syscall future_get(future_t* f, int* value)
     if (f->mode == FUTURE_QUEUE)
     {
         f->state = FUTURE_EMPTY;
+        if(!linked_queue_is_empty(f->set_queue))
+        {
+            pid32 set_pid = linked_queue_remove(f->set_queue);
+            // wakeup set process
+        }
     }
+   
     restore(mask);
     return OK;
 }
