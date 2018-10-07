@@ -8,7 +8,7 @@ shellcmd xsh_prodcons(int nargs, char *args[])
 {
   if (nargs == 2)
   {
-    if (0 != strcmp("-f", args[1]))
+    if (0 != strncmp("-f", args[1], 2))
     {
       printf ("Invalid argument.\n");
     }
