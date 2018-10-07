@@ -1,7 +1,8 @@
-typedef struct {
+typedef struct linked_queue_node_s linked_queue_node_t;
+struct linked_queue_node_s {
     pid32 value;
     linked_queue_node_t* next;
-} linked_queue_node_t;
+};
 
 typedef struct {
     linked_queue_node_t* head;
