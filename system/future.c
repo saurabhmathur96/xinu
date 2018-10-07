@@ -24,6 +24,8 @@ syscall future_free(future_t* f)
 }
 syscall future_get(future_t* f, int* value)
 {
+    pid32 pid;
+    struct	procent *prptr;
     intmask mask = disable();
     if (f->state == FUTURE_READY)
     {
@@ -34,9 +36,15 @@ syscall future_get(future_t* f, int* value)
     {
         // no value available
         // wait in queue
-        linked_queue_insert(f->get_queue, currpid);
+        
+        prptr = &proctab[currpid];
+		prptr->prstate = PR_WAIT;	/* Set state to waiting	*/
+		linked_queue_insert(f->get_queue, currpid);
+		resched();			/*   and reschedule	*/
 
-        // wakeup
+
+
+        // on wakeup
         value = f->value;
     }
     else if (f->state == FUTURE_WAITING)
@@ -49,7 +57,10 @@ syscall future_get(future_t* f, int* value)
         }
         // no value available
         // wait in queue
-        linked_queue_insert(f->get_queue, currpid);
+        prptr = &proctab[currpid];
+		prptr->prstate = PR_WAIT;	/* Set state to waiting	*/
+		linked_queue_insert(f->get_queue, currpid);
+		resched();			/*   and reschedule	*/
 
         // wakeup
         value = f->value;
@@ -60,8 +71,9 @@ syscall future_get(future_t* f, int* value)
         f->state = FUTURE_EMPTY;
         if(!linked_queue_is_empty(f->set_queue))
         {
-            pid32 set_pid = linked_queue_remove(f->set_queue);
-            // wakeup set process
+            // wakeup a process from the set queue
+            pid = linked_queue_remove(f->set_queue);
+            ready(pid);
         }
     }
    
@@ -71,8 +83,9 @@ syscall future_get(future_t* f, int* value)
 
 syscall future_set(future_t* f, int value)
 {
+    struct	procent *prptr;
+    pid32 pid;
     intmask mask = disable();
-    
     if (f->state == FUTURE_EMPTY)
     {
         f->value = value;
@@ -82,8 +95,10 @@ syscall future_set(future_t* f, int value)
     {
         f->value = value;
         f->state = FUTURE_READY;
-        pid32 get_pid = linked_queue_remove(f->get_queue);
-        // wakeup get_pid process
+
+        // wakeup a process from the get queue
+        pid = linked_queue_remove(f->get_queue);
+        ready(pid);
     } 
     else if (f->state == FUTURE_READY)
     {
@@ -93,11 +108,14 @@ syscall future_set(future_t* f, int value)
             restore(mask);
             return SYSERR;
         }
-        // there is already an unread value set
-        pid32 current_pid = currpid;
-        linked_queue_insert(f->set_queue, current_pid);
 
-        // suspend self
+        // there is already an unread value set
+        // wait in queue
+        prptr = &proctab[currpid];
+		prptr->prstate = PR_WAIT;	/* Set state to waiting	*/
+		linked_queue_insert(f->set_queue, currpid);
+		resched();			/*   and reschedule	*/
+        
 
         // on wakeup
         f->value = value;
