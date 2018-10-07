@@ -4,7 +4,7 @@
 
 future_t* future_alloc(future_mode_t mode)
 {
-    future_t *f = getmem(sizeof(*f));
+    future_t *f = (future_t *)getmem(sizeof(*f));
     if (!f)
     {
         return NULL;
@@ -18,7 +18,7 @@ future_t* future_alloc(future_mode_t mode)
 syscall future_free(future_t* f)
 {
     intmask mask = disable();
-    freemem(f, sizeof(*f));
+    freemem((char *)f, sizeof(*f));
     restore(mask);
     return OK;
 }

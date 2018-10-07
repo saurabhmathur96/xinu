@@ -19,7 +19,7 @@ int linked_queue_is_empty(linked_queue_t *q)
 
 void linked_queue_insert(linked_queue_t *q, pid32 value)
 {
-    linked_queue_node_t *node = getmem(sizeof(*node));
+    linked_queue_node_t *node = (linked_queue_node_t *)getmem(sizeof(*node));
     if (!node)
     {
         printf("Error: unable to allocate memory.\n");
@@ -59,7 +59,7 @@ pid32 linked_queue_remove(linked_queue_t *q)
         q->head = q->head->next;
     }
     pid32 value = node->value;
-    freemem(node, sizeof(*node));
+    freemem((char *)node, sizeof(*node));
     return value;
 }
 
