@@ -14,7 +14,7 @@ void linked_queue_initialize(linked_queue_t *q);
 
 void linked_queue_destroy(linked_queue_t *q);
 
-void linked_queue_is_empty(linked_queue_t *q);
+int linked_queue_is_empty(linked_queue_t *q);
 
 void linked_queue_insert(linked_queue_t *q, pid32 value);
 

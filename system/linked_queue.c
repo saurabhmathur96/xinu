@@ -12,7 +12,7 @@ void linked_queue_destroy(linked_queue_t *q)
     q->head = q->tail = NULL;
 }
 
-void linked_queue_is_empty(linked_queue_t *q)
+int linked_queue_is_empty(linked_queue_t *q)
 {
     return q->head == NULL;
 }
