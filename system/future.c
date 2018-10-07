@@ -37,7 +37,7 @@ syscall future_get(future_t* f, int* value)
         // no value available
         // wait in queue
         f->state = FUTURE_WAITING;
-        
+
         prptr = &proctab[currpid];
 		prptr->prstate = PR_WAIT;	/* Set state to waiting	*/
 		linked_queue_insert(f->get_queue, currpid);
@@ -97,9 +97,23 @@ syscall future_set(future_t* f, int value)
         f->value = value;
         f->state = FUTURE_READY;
 
-        // wakeup a process from the get queue
-        pid = linked_queue_remove(f->get_queue);
-        ready(pid);
+        if (f->mode == FUTURE_SHARED)
+        {
+            resched_cntl(DEFER_START);
+            // wake all processes from get queue
+            while(!linked_queue_is_empty(f->get_queue))
+            {
+                pid = linked_queue_remove(f->get_queue);
+                ready(pid);
+            }
+            resched_cntl(DEFER_STOP);
+        }
+        else
+        {
+             // wakeup a single process from the get queue
+            pid = linked_queue_remove(f->get_queue);
+            ready(pid);
+        }
     } 
     else if (f->state == FUTURE_READY)
     {
