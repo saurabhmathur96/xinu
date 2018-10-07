@@ -1,5 +1,6 @@
 #include <xinu.h>
 #include <prodcons.h>
+#include <string.h>
 
 sid32 produced, consumed;
 
