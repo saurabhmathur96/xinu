@@ -36,6 +36,7 @@ syscall future_get(future_t* f, int* value)
     {
         // no value available
         // wait in queue
+        f->state = FUTURE_WAITING;
         
         prptr = &proctab[currpid];
 		prptr->prstate = PR_WAIT;	/* Set state to waiting	*/
