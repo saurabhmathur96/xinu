@@ -28,9 +28,9 @@ mode = FUTURE_SHARED:
 mode = FUTURE_QUEUE
 
 	future_get:
-	if state is FUTURE_READY then read value, set state to FUTURE_EMPTY and return
+	if state is FUTURE_READY then read value, set state to FUTURE_EMPTY and wakeup a process from set_queue if any
 	if state is FUTURE_WAITING then add currpid to get_queue and suspend current process
-	if state is FUTURE_EMPTY then add currpid to get_queue and suspend current process; also wakeup a process from set_queue if any
+	if state is FUTURE_EMPTY then add currpid to get_queue and suspend current process
 	
 	future_set:
 	if state is FUTURE_READY then add currpid to set_queue and suspend current process
