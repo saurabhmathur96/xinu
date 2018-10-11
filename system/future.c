@@ -18,6 +18,8 @@ future_t* future_alloc(future_mode_t mode)
 syscall future_free(future_t* f)
 {
     intmask mask = disable();
+    linked_queue_destroy(f->get_queue);
+    linked_queue_destroy(f->set_queue);
     freemem((char *)f, sizeof(*f));
     restore(mask);
     return OK;

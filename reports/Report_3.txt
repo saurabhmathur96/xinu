@@ -1,0 +1,45 @@
+My future implementation behaves as follows:
+
+mode = FUTURE_EXCLUSIVE:
+
+	future_get:
+	if state is FUTURE_READY then read value, set state to FUTURE_EMPTY and return
+	if state is FUTURE_WAITING then throw error
+	if state is FUTURE_EMPTY then add currpid to get_queue and suspend current process
+	
+	future_set:
+	if state is FUTURE_READY then throw error
+	if state is FUTURE_WAITING then set value and set state as FUTURE_READY then wakeup a process from get_queue
+	if state is FUTURE_EMPTY then set value, set state to FUTURE_READY and return
+
+
+mode = FUTURE_SHARED:
+
+	future_get:
+	if state is FUTURE_READY then read value and return
+	if state is FUTURE_WAITING then then add currpid to get_queue and suspend current process
+	if state is FUTURE_EMPTY then add currpid to get_queue and suspend current process
+	
+	future_set:
+	if state is FUTURE_READY then throw error
+	if state is FUTURE_WAITING then set value and set state as FUTURE_READY then wakeup all processes in get_queue
+	if state is FUTURE_EMPTY then set value, set state to FUTURE_READY and return
+
+mode = FUTURE_QUEUE
+
+	future_get:
+	if state is FUTURE_READY then read value, set state to FUTURE_EMPTY and return
+	if state is FUTURE_WAITING then add currpid to get_queue and suspend current process
+	if state is FUTURE_EMPTY then add currpid to get_queue and suspend current process; also wakeup a process from set_queue if any
+	
+	future_set:
+	if state is FUTURE_READY then add currpid to set_queue and suspend current process
+	if state is FUTURE_WAITING then set value and set state as FUTURE_READY then wakeup a process from get_queue
+	if state is FUTURE_EMPTY then set value, set state to FUTURE_READY and return
+
+
+I have implemented a linked queue and put the implementation in a separate header file. 
+The linked_queue_t type is used for both get_queue and set_queue. 
+To ensure that the code is generic enough to handle all three cases, I have implemented all three cases using a queue. 
+However, the length of the queue is restricted by the future mode parameter.
+
