@@ -5,6 +5,7 @@
 
 shellcmd xsh_malloc_test(int nargs, char *args[])
 {
+    xmalloc_init();
     void *b1 = xmalloc(40);
     printf(heap_snapshot());
     void *b2 = xmalloc(2);
