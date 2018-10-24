@@ -115,7 +115,7 @@ char* heap_snapshot()
     int i, j;
     int allocated_bytes;
     int fragmented_bytes;
-    message[0] = 0; // set string as empty
+    heap_snapshot_buffer[0] = 0; // set string as empty
     for (i=0; i<N_BUFFER_POOLS; i++)
     {
         allocated_bytes = 0;
@@ -127,11 +127,11 @@ char* heap_snapshot()
 
         }
         fragmented_bytes = buffer_pools[i].n_allocated * buffer_pools[i].buffer_size - allocated_bytes;
-        sprintf(message + strlen(message), "pool_id=%d, buffer_size=%d, total_buffers=%d, allocated_bytes=%d, allocated_buffers=%d, fragmented_bytes=%d\n",
+        sprintf(heap_snapshot_buffer + strlen(heap_snapshot_buffer), "pool_id=%d, buffer_size=%d, total_buffers=%d, allocated_bytes=%d, allocated_buffers=%d, fragmented_bytes=%d\n",
                 buffer_pools[i].id, buffer_pools[i].buffer_size, N_BUFFERS, allocated_bytes, buffer_pools[i].n_allocated, fragmented_bytes);
     }
 
     restore(mask);
-    return message;
+    return heap_snapshot_buffer;
 
 }

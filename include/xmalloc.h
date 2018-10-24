@@ -16,7 +16,7 @@ typedef struct {
 
 buffer_pool_entry_t buffer_pools[N_BUFFER_POOLS];
 int32 n_buffer_pools;
-char message[2048];
+char heap_snapshot_buffer[2048];
 
 void xmalloc_init(void);
 void* xmalloc(unsigned int);
