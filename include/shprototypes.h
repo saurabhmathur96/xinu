@@ -93,5 +93,5 @@ extern  shellcmd xsh_hello 	(int, char *[]);
 /* in file xsh_prodcons.c */
 extern shellcmd xsh_prodcons(int nargs, char *args[]);
 
-/* in file xsh_malloc_test.c */
-extern shellcmd xsh_malloc_test(int nargs, char *args[]);
+/* in file xsh_xmalloc_test.c */
+extern shellcmd xsh_xmalloc_test(int nargs, char *args[]);

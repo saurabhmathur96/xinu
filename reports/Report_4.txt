@@ -1,0 +1,80 @@
+I implemented xmalloc as follows:
+
+## Data Structures
+
+buffer_pools: A global table of allocated buffer pools. Each entry has a buffer table, allocated_buffers.
+allocated_buffers: It contains the address of each buffer allocated and its actual requested size.
+
+## void xmalloc_init ( void )
+
+This functions must be called before any memory is allocated with xmalloc. When called, it initializes the
+buffer_pools table with buffer pools having block size in powers of 2 starting from 8 (=2^3).
+
+## void* xmalloc ( unsigned int size )
+
+It traverses the buffer_pools table and finds the right fit for the requested size. A right fit is 
+the smallest available (ie not full) buffer pool such that its block size is greater than or equal to the requested size.
+Once the buffer pool is found, it allocates a buffer from the pool and updates the corresponding entry in the table.
+
+## void xfree ( void* p )
+
+It traverses the buffer_pools table and the allocated_buffers sub-table to find the entry for p.
+Once the entry is found, it updates the table by setting that entry to null and calls freebuf to return the buffer back to the pool.
+
+
+## xsh_xmalloc_test.c
+
+Here, I have allocated buffers of size 40, 2 and 8 and free-ed them. xsh_snapshot is called after each allocation/deallocation.
+
+1. void *b1 = xmalloc(40);
+
+pool_id=0, buffer_size=8, total_buffers=5, allocated_bytes=0, allocated_buffers=0, fragmented_bytes=0
+pool_id=1, buffer_size=16, total_buffers=5, allocated_bytes=0, allocated_buffers=0, fragmented_bytes=0
+pool_id=2, buffer_size=32, total_buffers=5, allocated_bytes=0, allocated_buffers=0, fragmented_bytes=0
+pool_id=3, buffer_size=64, total_buffers=5, allocated_bytes=40, allocated_buffers=1, fragmented_bytes=24
+pool_id=4, buffer_size=128, total_buffers=5, allocated_bytes=0, allocated_buffers=0, fragmented_bytes=0
+
+
+2. void *b2 = xmalloc(2);
+
+pool_id=0, buffer_size=8, total_buffers=5, allocated_bytes=2, allocated_buffers=1, fragmented_bytes=6
+pool_id=1, buffer_size=16, total_buffers=5, allocated_bytes=0, allocated_buffers=0, fragmented_bytes=0
+pool_id=2, buffer_size=32, total_buffers=5, allocated_bytes=0, allocated_buffers=0, fragmented_bytes=0
+pool_id=3, buffer_size=64, total_buffers=5, allocated_bytes=40, allocated_buffers=1, fragmented_bytes=24
+pool_id=4, buffer_size=128, total_buffers=5, allocated_bytes=0, allocated_buffers=0, fragmented_bytes=0
+
+
+3. void *b3 = xmalloc(8);
+
+pool_id=0, buffer_size=8, total_buffers=5, allocated_bytes=10, allocated_buffers=2, fragmented_bytes=6
+pool_id=1, buffer_size=16, total_buffers=5, allocated_bytes=0, allocated_buffers=0, fragmented_bytes=0
+pool_id=2, buffer_size=32, total_buffers=5, allocated_bytes=0, allocated_buffers=0, fragmented_bytes=0
+pool_id=3, buffer_size=64, total_buffers=5, allocated_bytes=40, allocated_buffers=1, fragmented_bytes=24
+pool_id=4, buffer_size=128, total_buffers=5, allocated_bytes=0, allocated_buffers=0, fragmented_bytes=0
+
+
+4. xfree(b1);
+
+pool_id=0, buffer_size=8, total_buffers=5, allocated_bytes=10, allocated_buffers=2, fragmented_bytes=6
+pool_id=1, buffer_size=16, total_buffers=5, allocated_bytes=0, allocated_buffers=0, fragmented_bytes=0
+pool_id=2, buffer_size=32, total_buffers=5, allocated_bytes=0, allocated_buffers=0, fragmented_bytes=0
+pool_id=3, buffer_size=64, total_buffers=5, allocated_bytes=0, allocated_buffers=0, fragmented_bytes=0
+pool_id=4, buffer_size=128, total_buffers=5, allocated_bytes=0, allocated_buffers=0, fragmented_bytes=0
+
+
+5. xfree(b2);
+
+pool_id=0, buffer_size=8, total_buffers=5, allocated_bytes=0, allocated_buffers=1, fragmented_bytes=8
+pool_id=1, buffer_size=16, total_buffers=5, allocated_bytes=0, allocated_buffers=0, fragmented_bytes=0
+pool_id=2, buffer_size=32, total_buffers=5, allocated_bytes=0, allocated_buffers=0, fragmented_bytes=0
+pool_id=3, buffer_size=64, total_buffers=5, allocated_bytes=0, allocated_buffers=0, fragmented_bytes=0
+pool_id=4, buffer_size=128, total_buffers=5, allocated_bytes=0, allocated_buffers=0, fragmented_bytes=0
+
+
+6. xfree(b3);
+
+pool_id=0, buffer_size=8, total_buffers=5, allocated_bytes=0, allocated_buffers=0, fragmented_bytes=0
+pool_id=1, buffer_size=16, total_buffers=5, allocated_bytes=0, allocated_buffers=0, fragmented_bytes=0
+pool_id=2, buffer_size=32, total_buffers=5, allocated_bytes=0, allocated_buffers=0, fragmented_bytes=0
+pool_id=3, buffer_size=64, total_buffers=5, allocated_bytes=0, allocated_buffers=0, fragmented_bytes=0
+pool_id=4, buffer_size=128, total_buffers=5, allocated_bytes=0, allocated_buffers=0, fragmented_bytes=0

@@ -1,4 +1,4 @@
-/* xsh_malloc_test.c - xsh_malloc_test */
+/* xsh_xmalloc_test.c - xsh_xmalloc_test */
 
 #include <xinu.h>
 #include <stdio.h>
