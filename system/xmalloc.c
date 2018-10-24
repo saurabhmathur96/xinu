@@ -2,7 +2,7 @@
 
 void xmalloc_init(void)
 {
-    // call mkbufpool
+    intmask mask = disable();
     int i, j;
     int buffer_pool_size;
     bpid32 buffer_pool_id;
@@ -15,6 +15,7 @@ void xmalloc_init(void)
         {
             // Error
             printf("Error creating buffer pool of size %d\n", buffer_pool_size);
+            restore(mask);
             return;
         }
         buffer_pools[i] = (buffer_pool_entry_t){ .id = buffer_pool_id, 
@@ -26,9 +27,12 @@ void xmalloc_init(void)
                                                                       .length = -1 };
         }
     }
+    restore(mask);
+    return;
 }
 void* xmalloc(unsigned int size)
 {
+    intmask mask = disable();
     int i = 0;
     for (i=0; i<N_BUFFER_POOLS /* traverse from 0 to N_BUFFER_POOLS */
            && !(buffer_pools[i].n_allocated == N_BUFFERS) /* skipping buffer pools that are full */
@@ -38,6 +42,7 @@ void* xmalloc(unsigned int size)
     {
         // requested size larger than largest available buffer pool
         // return null
+        restore(mask);
         return NULL;
     }
 
@@ -47,6 +52,7 @@ void* xmalloc(unsigned int size)
     if (!buffer)
     {
         // error removing buffer from buffer pool
+        restore(mask);
         return NULL;
     }
 
@@ -61,16 +67,19 @@ void* xmalloc(unsigned int size)
         // No free space found
         // => allocated_buffers is in inconsistent state
         freebuf(buffer);
+        restore(mask);
         return NULL;
     }
     buffer_pools[i].n_allocated++;
     buffer_pools[i].allocated_buffers[j] = (buffer_entry_t) { .buffer = buffer, 
                                                               .length = size };
     
+    restore(mask);
     return buffer;
 }
 void xfree(void* p)
 {
+    intmask mask = disable();
     char *buffer = (char*) p;
     int i, j;
     for (i=0; i<N_BUFFER_POOLS; i++)
@@ -85,6 +94,8 @@ void xfree(void* p)
                 buffer_pools[i].allocated_buffers[j] = (buffer_entry_t) { .buffer = NULL, 
                                                                           .length = -1 };
                 freebuf(buffer);
+                restore(mask);
+                return;
             }
         }
     }
@@ -92,16 +103,19 @@ void xfree(void* p)
     // buffer not found in buffer pool table
     // error
     printf ("Buffer not recognized.\n");
+
+    restore(mask);
+    return;
 }
 
 char* heap_snapshot()
 {
-    char message[2048];
+    intmask mask = disable();
     // pool_id=1, buffer_size=32, total_buffers=20, allocated_bytes=243, allocated_buffers=10, fragmented_bytes=77
     int i, j;
     int allocated_bytes;
     int fragmented_bytes;
-
+    message[0] = 0; // set string as empty
     for (i=0; i<N_BUFFER_POOLS; i++)
     {
         allocated_bytes = 0;
@@ -117,6 +131,7 @@ char* heap_snapshot()
                 buffer_pools[i].id, buffer_pools[i].buffer_size, N_BUFFERS, allocated_bytes, buffer_pools[i].n_allocated, fragmented_bytes);
     }
 
+    restore(mask);
     return message;
-    
+
 }
