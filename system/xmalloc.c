@@ -91,7 +91,7 @@ void xfree(void* p)
 
     // buffer not found in buffer pool table
     // error
-    print ("Buffer not recognized.\n");
+    printf ("Buffer not recognized.\n");
 }
 
 char* heap_snapshot()
