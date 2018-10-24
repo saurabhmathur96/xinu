@@ -116,4 +116,7 @@ char* heap_snapshot()
         sprintf(message + strlen(message), "pool_id=%d, buffer_size=%d, total_buffers=%d, allocated_bytes=%d, allocated_buffers=%d, fragmented_bytes=%d\n",
                 buffer_pools[i].id, buffer_pools[i].buffer_size, N_BUFFERS, allocated_bytes, buffer_pools[i].n_allocated, fragmented_bytes);
     }
+
+    return message;
+    
 }
