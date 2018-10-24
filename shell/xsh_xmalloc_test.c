@@ -3,7 +3,7 @@
 #include <xinu.h>
 #include <stdio.h>
 
-shellcmd xsh_malloc_test(int nargs, char *args[])
+shellcmd xsh_xmalloc_test(int nargs, char *args[])
 {
     xmalloc_init();
     void *b1 = xmalloc(40);
