@@ -43,5 +43,6 @@
 
 #include <linked_queue.h>
 #include <future.h>
+#include <xmalloc.h>
 
 #endif
