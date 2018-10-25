@@ -9,6 +9,8 @@ allocated_buffers: It contains the address of each buffer allocated and its actu
 
 This functions must be called before any memory is allocated with xmalloc. When called, it initializes the
 buffer_pools table with buffer pools having block size in powers of 2 starting from 8 (=2^3).
+This function should be called only once, ideally at boot time. Calling it multiple times will discard the allocated
+buffer pool entries and replace them with new ones.
 
 ## void* xmalloc ( unsigned int size )
 
@@ -21,6 +23,8 @@ Once the buffer pool is found, it allocates a buffer from the pool and updates t
 It traverses the buffer_pools table and the allocated_buffers sub-table to find the entry for p.
 Once the entry is found, it updates the table by setting that entry to null and calls freebuf to return the buffer back to the pool.
 
+The number of blocks per pool N_BLOCKS and the number of buffer pools N_BUFFER_POOLS have been set to small values 
+so that the output is readable. These constants can be assigned larger valued by changing the pre-processor directives (#define) in the xmalloc header file.
 
 ## xsh_xmalloc_test.c
 
