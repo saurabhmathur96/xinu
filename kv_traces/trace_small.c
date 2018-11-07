@@ -1,695 +1,697 @@
 #include<kv.h> 
  int main(){ 
-         int retval; 
+     int retval; 
      int set_errors = 0; 
      char* valtmp=NULL; 
      int get_errors=0; 
+    kv_init(); 
 
 
-    retval=kv_set("pzsqvptx", "krfixupkwmqsbutfwecrocnwssrveokgsmjekurgkducotrczylpvxqdeihkgjenpocahpdfcojxggi"); 
+    retval=kv_set("ctttjyhm", "rmxrodelucysiaytouifbtryfcdveypsjw"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("hjvxlftv", "vcxopnfxappgjdzwkioivlhfsktzfpkzfnh"); 
+    retval=kv_set("odzuzdge", "txegveaskmlwxkpnrzmurhsbyrrxqudjgrpxom"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("gehwtqoc", "txrrhthpdtbnimyqyerzwkmvjysxfezztcvtdldzwbozvcalxeppmnyatnjtymthopsywltrauvlezxrqufcwwjbrnzsqjcrizawtfjhsocykblpamfpakadic"); 
+    retval=kv_set("kgjdzmou", "ysrmvfneqeyjllycbxqmtyryhrdibymzok"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("yjcqblbe", "wxwwobubhvlmvmtvernmnuljfqalozcjozifikdfcqtgvgxnekqiwmpsipykvvuckpkitstljfckvnfekppypnmdphosuotsboevhsuaelieytkauhrbrgdfhwkkkwae"); 
+    retval=kv_set("ijqoehjq", "gzirqtbalnhriihrbuusfuaqrpkopniecqsqdtzpxqdst"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("ltuplkff", "vwynemnbgqjygptbwsdpmuaisxxwluana"); 
+    retval=kv_set("ynlqrbas", "gyyempdvkcdzonpilwvqfqmpsqpbmmrscawqgbuqpdagmazpvzehkocwuuyoxxrp"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("anrpfcrh", "ghwmmgcknuatkmgtmyvlasvijprzqvlhx"); 
+    retval=kv_set("hakqxkkc", "yfcoxahjbzpcyallsgioezlyqnsbadvqxt"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("auibjewn", "dnhttnquhurtvhrdrudiqjgwnruoncuon"); 
+    retval=kv_set("wkgftqxb", "dtpcbbnqzqjhuveyxehkebiawcemoolsl"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("bygdwubm", "adcjavkdnadvwbkjpfrymuyksfhzyrsvac"); 
+    retval=kv_set("mvgjjgrv", "yihhepvzdsrwqpummctenmuwszqwnarxz"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("xzgbttdc", "ovplqgpiviafcmixmnowwsjzjlcjjbvudqeyyldawyjderhjfi"); 
+    retval=kv_set("rfhwuoip", "gawhpcruuirnunlpaqfznwiwcreaqirmm"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("agzylqci", "renlmnwsltyjlxsrrnzszrvfqafnqwmfwhlxpjuyrwhbecanb"); 
+    retval=kv_set("nvyibnyx", "lkjjggxjzkbowapsrilfgfkdatrycrktrsxbmimueoobazvpacgjmsfvgrgxscpfopkowjzcjxq"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("xxdlpfdd", "qrsnljdurnauxbtwilbgkiubfizbwsxqq"); 
+    retval=kv_set("mtyakndm", "ivccbgnyhkcybyipmltlzhrkhwmuvuxgmvbfbdtabehxslxgasoqnsmozyelhvvwplxgsswngmccivqqupkndyxqhbfvhrhgofjyyhqppvkrvauiou"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("zfdbdbjq", "rlcszuotlucwgajnlprishhzqadmkobrq"); 
+    retval=kv_set("kocgened", "npfyxbapmysgusnnslacqydjmzhceeymw"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("waroxtkv", "oygeqjvnysriydcbsejwbuhiyuqbrkniohhlwfewrsjvacnvhibncweuzzgotynczpowemobynesojymdgwsmghnqwscnleyaioinjevgxbaeqzhfojxsmeyprvbvwlf"); 
+    retval=kv_set("onuaylmt", "zqntdjbtdzszjzvlkjtjmmgmeycrboswx"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("emqltzmz", "qxkwbphspqviiepttnznyzmkxeiyuanmqacjojl"); 
+    retval=kv_set("ogybhjed", "aodzucbqffxbmaluyawyktskodqgxgirw"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("akhllzey", "kaaxpmyyzosgwgvnmznnugfhonbzsdqstgxy"); 
+    retval=kv_set("urlnnweb", "noqekplzdbqufojzxgoqqokfxoakdokwaxalain"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("stvwobsm", "bgxbqhwuicsldfjusveztgfvlfqmoscogfjwgmnyfbbmuuwshojjpruahseyacueqctkdtbxlgkijkcnlwuphzkctdirgxqfjqeroqflokeqwtfjflwztgrkcaghstze"); 
+    retval=kv_set("mmvryhnt", "mdqfxfzicdzjkeduzjqfalakefnyuexdrtrorceodogdstrc"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("iawzaccc", "btqvrjwjjqsmunczwwgubqjsdysxdpfcayigfqryyyomvjzthwhcchgwipnsejutqclgppdgrdlzsrajfjcgbcyqsamcimqqjgjsqfjmwboekquahykamnkwqnsyqutd"); 
+    retval=kv_set("rqcdxqsp", "pmfdjdxhdpvsyxyhxyhzyifjtlcegypdkl"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("nfivzgst", "ofpulvntweiznuedenxnkbskonhclbeve"); 
+    retval=kv_set("vikovupl", "ddjxoxaedtcweybizdosaobmogzyesnjv"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("jpfamygs", "wyemyvafsuznzmfzgtbkrrsskwusihlbr"); 
+    retval=kv_set("tmiuuwby", "lfmbltdcyactwpbmzhwgkkmrhsmihsela"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("tlyqnouo", "rljsaxmoesokmvhkzcbjuipgfplghrvok"); 
+    retval=kv_set("fadgfbvk", "dzzdkzgcesdjgbagjkepycfqvjciwaicdhotlsf"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("pjhwfwko", "zkzwmgsvvetatnhfldmzxzexdfdlgfaflgkcsvb"); 
+    retval=kv_set("xmyluvto", "gpwfcijdpopngalqqhafrgshpcgsxqkcczpcrpog"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("tdwyiehl", "tpcrwuiuzttjxlvkawwvcpznvugpzupznq"); 
+    retval=kv_set("dtoyiuhv", "gvlmforxbuqmvznwuonzakbzzxrwqaoqcfjgmwamwlcbvdnjbnquqtscllkxslumaizihjwvtkvlueooioxoyxjsxu"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("gdevsbcf", "llaazipsssnknoecjjvlajtsbmetlitadywuiadmekteqrhhqnatahzscnfgmozkaicmocvvjezkbypqfxkvokxbbcwarlmodfstckadvevzozkjsigxcvupnkvdznda"); 
+    retval=kv_set("ewtrvtab", "hfjmbllxmprtqezicnlfnopryhsrustzhl"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("mbwkrfpf", "wrlywwrmnclbphxbhsmasxukgjrmogznplaiatqmepktogqprbvxeexwbscnvckuisxhmtnssbfceswuwuhcpddjkpvwenamapgvzvfoxjvbmelkshrsliwnbjskgmdl"); 
+    retval=kv_set("vxdyzxnx", "argftbncpwsgkjzjeefdtlcwqhbuzbgqe"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("trlzpfgk", "vklelgsztcgnmnwimnhbguotdkcrcthdx"); 
+    retval=kv_set("flyswpbf", "ftkowvcvrlrcfmvuonabniqycgmlijxvgaa"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("ajmjrzuu", "sdyjjohqjlwpobmzxwlyyojgoouttkhnmagerx"); 
+    retval=kv_set("zifzrsnz", "vgrzkikizxkjcijsgcesidwowolkxgaizmlewuuxmksvomyqvcaojsinkkgjzpulwlnxkrqlevrxomquhdsblcgojwgeayndsmmlinvifwxzsgndqvorzhgciyhtnqoy"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("wfbubhrv", "snysfgvcavxihdhmlsjiwgsmbzmreabahxoxtkkwwnk"); 
+    retval=kv_set("ouajjwpo", "cjnhbwztxfrqrvswpytnjtsvdsfvwbwemwvvbgghhmwsxwzbnlvy"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("lkdrvwis", "oofnskuigednegsyqqexolerycheeoujb"); 
+    retval=kv_set("cigsobyi", "zezwebqfqvsbbfpeudcpvfnrvlujbtkks"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("wchiuqij", "mbztohazvtedmnrwtedkzshmhvvnkioqlbvwoqeabmjmsysntbxxtdaxodfjpwnznfawftyiuxyeaiatuioojvnrimdfpsoflqftuedyiuvoxjyfimjstvrvpfqgwfrv"); 
+    retval=kv_set("dgydohps", "yaezwwlgnntcykvxwvdqukxljypfbnbovcgnumfccgjakd"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("ipebvhcg", "ryntttylvntfthhqcinphjiygrcryuxdvqhmynqaansrnvuuhdprsthklmuhfncffpcuaabhuewkhuirqwhqlvkpfuwiwpluxwxuybsdqxlcysxagwzacgqwrtnswepl"); 
+    retval=kv_set("zeplnykd", "krwlowaqqhfdavujijyjsciikqlscjnismmpogmwiaujlqoxiatycfprgmrmidoiupibmindmlbfevemscoqziqdqfvvjgdcprllgfrjxlsixnticvjtrizpnomyajjp"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("prqvkseh", "vkpssqquxlhqggkxjjxizyzdbaagyuqvoninlfhfayqpaaxffkizdbhqklfrvzqsrazbynhjpoevcesdshkwgjfteheshneqsgjzeggcxjtjrsbseozuthlmmqwhqvae"); 
+    retval=kv_set("devigyjg", "nqqwpmdwfdnpfhydsliuwddnywigajongfpkmyiioqip"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("stoyheuj", "bswbicsvlipitgdecmclkvgndrfrtwssebdjpcjazoxgkwzcwxmkszy"); 
+    retval=kv_set("ztlhwgys", "awvmalxawgvnrfzjavobjicbypxxsjdgypb"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("ccbvarun", "gmqqiqkhmpfrtrojfogrdbrzkxnbwokal"); 
+    retval=kv_set("inpnxtac", "ktkrsrodlskonevuatjhxeweucpqmucmshdw"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("bogscirq", "tqskxxjxrqhdsjflegtsvytbplrgqlavwh"); 
+    retval=kv_set("gvrkgrdx", "mvyzsxcbjwgohjothvegspngqibsuqrmw"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("xhlrmgqz", "smnxnhrwfyhupszopcrphedqrwcyulpkc"); 
+    retval=kv_set("zycnxyhc", "fddlypvrgsyvayxavggpieyoqgrqihplwlkuebaywxnjyimvunfphgfzauncl"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("nmubvrjp", "ceqevhhzuflsnwnpkrrhpamruoqvejjoq"); 
+    retval=kv_set("cjinsykl", "mjbfatbjyssycbprsvgwjvsdhvjhfitsr"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("vyzhpghu", "jisvlsazrfrtmwgurymlfxdsazyetyqfe"); 
+    retval=kv_set("yxmupovl", "ruyayngxvrbgkvyamkyikjeitrlrulubfynjw"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("rignpjmk", "lqqdbkiieowsiybyyrccggermvtuqjmyn"); 
+    retval=kv_set("ebmxpgcm", "aklnimcidhuxwbhufryffoswrpyoqiufs"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("dkffvjby", "kkikgoldppfpsqaljnfxxctrqwzdqkrlht"); 
+    retval=kv_set("vgwujakj", "gmkdckrfytdlpbuyttkyzarmpgjigbjrafvjjbhfjfkdmtkaaupqgakwqwprhmxiabcdhmzdsqbonht"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("kyxfkitu", "rlxjuwpiynrkeudivrxcwbzawdlxczkxb"); 
+    retval=kv_set("hilffnre", "toafrfhzhhmxjtgimcfizfzrdbsfgozqortvacr"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("rlgiccaw", "cowsklefjcwmsshepwsnfyxqfplbedpfahrxtglnitmhhoalbfvyoxx"); 
+    retval=kv_set("jraghxoq", "vaebjlifywwjwqifzidzketgpbcpuqtmoymdabuugfxxl"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("eqrvkusw", "aclnbfdgzuuabskyzcdchmhqpwninncznhdlmvohshuhenyxzkk"); 
+    retval=kv_set("sburegwk", "pwwylirntehghgcepffevgcxszxzfpoqfvj"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("yjapsdrf", "puwclfkfcdpgyukkwmthtwgfoqeeickxmjpwoqnrkqwzhwpjvjwsesgchheximgtfqfeejgazdybxhg"); 
+    retval=kv_set("kkjtdxmh", "rpqhdlluhnhmtdmhvrbzhlcjjdvrinshz"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("xbwxgixg", "xxedtztwnayvcvatuwruowllecprchkmyrykhvtpewpoioxnptngjuysndrcqtueqsuxssmaibxmtnrnykwezhwciaqhzjxqivzrwdblbxthtdtlkbatuiqfcbmkuhkc"); 
+    retval=kv_set("bgmgzkar", "cnacgrebpiptazdfzvrkafitbaaaoegub"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("rxepdjgl", "gfuhvjtwjaeqtitxjcmwaynagipltbaid"); 
+    retval=kv_set("nnootnav", "wphhgsmdcvthlkzfadkeunxwzpupfzykcp"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("ddrfvjew", "zkfzcbxnicradvdzkcmwqiyppqqsmsszajjswemgnpiskgbutqahgdeywlqnktjocwfgijnfmjfgdgy"); 
+    retval=kv_set("wjrrhvjs", "qnozavsqbwwidtcyybgnoagqnsnzaqhtf"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("znkxoebm", "kxgwywdxqufvybclqqvjfdpkwkrapnmwgg"); 
+    retval=kv_set("fqmbvhla", "eybrwxydijrgpwiylrjzmrbzzhfxtcfafkjsdgk"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("dtfzixrk", "ovwihymilxykhnhwoywpwzudbtyhkysqto"); 
+    retval=kv_set("gyqmettw", "jxtabrochwryotzxqyrxoiqerearqpoadktieapbhaqkgq"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("doggobbl", "fzvjikjkhjnzegqyuwzqvorowpoubmuuth"); 
+    retval=kv_set("zpjkgvqz", "wsjsmpxapuahwlmryswnmhqpzhabwezsld"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("hwddybvc", "raitqwsflwujlfoyrvhstyakghxfldnxhx"); 
+    retval=kv_set("lfuznymh", "syjvzbzyjvglemklurbgrsbjqnzhlcvxflapdnjmtqmjspofzpltadbttmrrtgqpsckxxsfhrqceigodlzqltdpvijudaiksayrbhanucgevtvfqjxbclgapxjjebiiy"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("bwiqalhi", "henvqhptstlohcvtyywzompzyivivkkfkhxmjtutqwyfxupyhjztymtvpkiqxxiiaxzcgmshqesp"); 
+    retval=kv_set("ipaiskfa", "kbshwwrljzwuharlnqcjbdqlimpebcakml"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("dgtcprao", "eeahuwqfxjnpzzahvrguozgzbtamvaprfqla"); 
+    retval=kv_set("fxufhqbk", "zmfeagguwqpzpslgbqijcuxksrlytwzna"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("qkyouhwu", "yvfxqsbccauztcxczctonurgimhdlzrfbioic"); 
+    retval=kv_set("ysxlxhpl", "hpnphmzsuinqwqbdnctebzfnpdketvxri"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("gzuynpsl", "engqvudixnxsiiiccpdukyoxdfxagayyiso"); 
+    retval=kv_set("sdwupfex", "ecvhtzuqwarmvwibwmgewrtqcyyzkwwle"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("xzlytvmk", "lwqktrwzeyfdjbxjcyocnizvezaqleinluayz"); 
+    retval=kv_set("blewqzvl", "dcwqgwgjzirkkeieorcetctyrmslvyuxzhy"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("uthdosjl", "xmfxghltmqnqdsjpisjgelmlokqfwydpv"); 
+    retval=kv_set("guckgxqh", "cpekxvgjbwmkgijdxcbvhivhgopfkzxxdhudutdhiszlwxwsezhphibcjotthluxxkfmkakpfdbujdtngxlhyoarsfohojnwrri"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("vzgnisgw", "vhnnlkksndiywgxidifvriklbzlocgnjc"); 
+    retval=kv_set("mvckwkrs", "isnlwbjprbrgtzgwvszcmqrxpwaaujpcm"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("qnyhaykx", "epfnhthuragfispaqdfbdpwbdycgpugudktw"); 
+    retval=kv_set("xannhmce", "tlqgidgqlzwqyzfqnogekxudegfkyolxppkptbhqlbylulhcxtrzzlfeetlxycalgsxdualswsfbkgrxgpxukgreatvnhfgqobfvgsqnahybmynpqzzzsvstfganavso"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("daijkpvv", "knjpzhyqshtpjclggcrmhezqmhxpqmkqw"); 
+    retval=kv_set("arqhxryv", "bfvcblhhgnhsrjfkkcyldfmrnorczinkoc"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("svkhgmrx", "jhvivikawzqtdatfhsjregtzyqebhyuey"); 
+    retval=kv_set("fywtqcfw", "yylcimaclppphvccjsdwbwjzlpobdjkmk"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("evpodzsr", "fforjyjiijydcpmalbzanbjjqztyigafm"); 
+    retval=kv_set("wfxzgzox", "rlfqiochpwilsarjjzdfzbucynfvlwrmff"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("pbtfzttf", "nhkmyvswzywkagzfjenosrcgphqiwioidh"); 
+    retval=kv_set("ccsywfdk", "qcrwitmxdvgwvezvteuvcggwhonwxxagt"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("rmbzrfrb", "jtniozhtuyngcsikysveznypbozeselklc"); 
+    retval=kv_set("vqicmill", "czzqlwtiigqqfqfyfotslvmesshkqzlde"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("adqyxqda", "mjrobvzwfbfqiivomjpznmneglcfqeezc"); 
+    retval=kv_set("majlgers", "ixzdigeqhwduossthxtfbrlthwfxefzgo"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("pcybhtvb", "jzimejjtmdkgxchikdrussxkfresxapqskt"); 
+    retval=kv_set("rnbrdrvt", "jdetupgwkylaeotrjktvenxwqmlydsfday"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("xlbeqqxu", "bgsbdbzjgumbsvonhlnohravlgiepftmemjhrwtacpgowucahncfpcvujxwyyeoirgmmeeeepsipsfchacnpdjhvxmdlwoztnjcxlxfzbqwvpbpxlqgvqmse"); 
+    retval=kv_set("pitavdgh", "tktvvmpdeinqlfpnnjpxhabavsqkhmeeo"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("bkpbbvdq", "lbtxproagtwjbglufgpmpcymozttdkyku"); 
+    retval=kv_set("kfjvvrwv", "emreqcspkbfxjioyozotnpzxfpydqbqnt"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("htdnapig", "mssgjkxkqrgazkkulraxsgitofithjarboaztckb"); 
+    retval=kv_set("zclbciav", "titevwiccfktjbqlhznubznwnfizkjvkznkrokyyuinecibxwsvpwiynhljkbqrzqzwsggoxkyruvyrpbleutwcgkicswltzrjayyweynodanrmoplxqaffs"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("tbpndxkd", "ypevjjcmifqohykdmapfafprcejihdqvyzul"); 
+    retval=kv_set("mzmlvzjj", "lktdgermtkuuidshntfigvbvqjghtwlcgeibiftnaxsexcyqogznypoidcxkwqorbcovneslsgbeasrvjntykhctwuctnxpyroczbdgtkmsjodzwcvqcwllnpucpjqrb"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("viqxfywj", "digedwvxwixwsjhaqaxbuvbavlicmfcnv"); 
+    retval=kv_set("xhvtbxsw", "xlxnbfhtucnzbmepxsbsjljjiphavclbp"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("jpgszpvv", "hieeeyovnudpvzxgrywamsynfwcghppxysky"); 
+    retval=kv_set("mvlooebs", "yimkikymjasrquodomjxxyewwkqdgcowijehexdbdozbaftwd"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("nqwrejhs", "czkanikjecwfoimnlllorrvcubzrtdzitrjfhfijmbzxejkb"); 
+    retval=kv_set("zjcgrbtu", "gwvfgjvqebvqehvaszfogpdfyzvcnugomwh"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("qhomyktz", "uesvitanxwdzqpnmpypsimfpoppllzkop"); 
+    retval=kv_set("ygmumaab", "sdifmxwfyrmjshgmawzgzofkthdwzworsmqk"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("hztiwust", "ypxssiwdfxzrcvaliuidecvufcrhqysmb"); 
+    retval=kv_set("rluzymzr", "uoswrhkxupkzemgdkdcnxuaflxgtevwpdszxztghzjfuchpsovumfqidmupxwayxsnregylhxqwrreabidhhcsxenjaonbciyecqznzqpfbvedswutgkjoylbdeuaipa"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("ezptdcfk", "cmpxvhqcjhdvzwgqydjhtwkeyweaqqukppddmawvnxyrmjchhdqhowqrglbszwyqdx"); 
+    retval=kv_set("wdrsngeb", "vbkujdugmcizawjpqxrgfohgcnpnqurlhyztzvpabnukys"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("hqixkfdk", "wtdxduhoqrjubkecpmqfaidribewqiuum"); 
+    retval=kv_set("xfzcrlat", "hzbqzmoigmiiulaxxyqagsbvbkqehrkiqo"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("zozhxlkj", "nyiwywhfwpskxzbaaelyqphlvdsaoguyodevf"); 
+    retval=kv_set("iqdkicsi", "nrxswubvhvlgrfgyiwywnqjyouvxsjfdiw"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("kqpiujdo", "hrnepeoxwjlssgxbdtdwqzfcoemgdkgarub"); 
+    retval=kv_set("jcueovfx", "vqdjzcrosxizadudxfgdesgnmxukmwsvdxbni"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("nmtfduoq", "whjzqvhulpilsivnsxbkkfxwgcegygvkmw"); 
+    retval=kv_set("zyraojgl", "wumehdbwolpvahzaodkqdzektpywlsjtg"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("twqqlydd", "pycswibeysmrbximzktjfobqrdsaspafblo"); 
+    retval=kv_set("inmjcsga", "kpauoujwwnywohcinqhxwqshkyyfyfycmrlhaischpntaforspebclvatitvtmqicmvgcbemkkixcheyvmvkpcuxsryecvzlayxliyrmonqdlnpgwgv"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("izuncbuh", "ugsutkkdiiovrlyeivkvcozksnfppaghd"); 
+    retval=kv_set("xfroftin", "lraageiiisykhkoobfoirmnztzthgxaebimba"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("pohmwqcu", "jwqqoxodubdxaolqxeiwljiztacjjldprefznws"); 
+    retval=kv_set("knahtlno", "indckiklnnyyqvpteftwkshlomcudcpib"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("uqmtusxg", "aytgzehsltauqzlmcarphonwkydmzifwxgo"); 
+    retval=kv_set("tnjldbgq", "oyijblfsuzxlluyltqctgsunbizftlouo"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("yxlllweh", "foiowzedclkojdoznlsxcqdkayezphnpo"); 
+    retval=kv_set("osorrqjg", "kwjxmtopguhoonofonvrdhiplnwwcexpd"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("gnpirfng", "rpapmqykqbztwwtdpkymqjwgwwkecdpsqtpzlzgfyrhi"); 
+    retval=kv_set("uzbvuegx", "aoaesrmefzjheyoewrdllvikmlgcvxvjsrskbizhhzjdbbjcqzeyfzmxcaylqnuvvwzgtcavjgyzexngbjpwkeixhixtkvpdjqcuifdztotoodzeqfikuumucutzcxxc"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("isuqwjbn", "tmnyfamcfbzumbebuumtunsogcbrjkzrubbdctqaz"); 
+    retval=kv_set("oxwvsdce", "blrtdieneoukfzugwicksbqmglduiefslsegrkdlvztcrqnwltvtpffpsggqvwnqgvdatgldnschtixqmniwesuzjuzflxceyyucdccvklnkndsztjddlkxmwayddgtx"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("hrothfpg", "duwzvaktkbqvtocorxqyywzzfuavyrisi"); 
+    retval=kv_set("dnrhvjpv", "hcvqzydcaofhjaurmvvrhfplskkvovbuqsyfwojzkrhqrleidbiuegrfsevxhynebgigiwdtwzndrlvioipxybxidosxguseryoffhuvvbhwpdlbjmhqrhvutalfixgn"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("eqkpeiwb", "obuazokifzsxclvwgatoviwvmqyctbwnh"); 
+    retval=kv_set("hqlmqhnp", "pmmurrpsrdzlfnzwhxwedjewrssnuumrc"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("qrcdbrxv", "noxkqrozgusdzdqmulyysypinxrmlhjsikspcjxmbgxr"); 
+    retval=kv_set("cfsuqzdw", "xxldnucoyltjtuaerspcsrprhwcitkdkb"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("dwucujmn", "bnhqqegionaswxtcbmbbfwdycuqciyqujgdoazwzqav"); 
+    retval=kv_set("suwrvhdb", "andinbyoxgakfvgmatddzazlcbkhesbkytygbuygxvjf"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("xwcstcre", "syxqyjpzoatdeynniqfgrcwuefpbbhgld"); 
+    retval=kv_set("pludzohs", "sajtmsazbqemdagclnqatmuhmnloskupvys"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("vtmvgggf", "vqigqulpgcrmkxatotrxmdcrjnzageiycankjy"); 
+    retval=kv_set("erhjzcvr", "ybuwawojgkruyfhpvmpmmtjidhsnxkglufluvnhxxbcggvacacemofrnn"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("caqkpsfx", "kzkgoivulxbprztfffjczmhbiriiiiiuep"); 
+    retval=kv_set("toexadjb", "denqpxmzuqmcaxqhomvdzepmshigmyfmbstyjp"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("kcjeymsq", "bigfhufrzqkqouglsvexmatjcdebtuedfdbaxcyaohdqsdqpzeqtasxocpavsavzcoyqqsnsefhrvzhumyua"); 
+    retval=kv_set("izgfjhgo", "tupbnizwbezmrvhcosgkcnsuswytwkpzzoioenuvem"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("yafulfvt", "jnxwvqnkegcojjodozrbmojogetrezjei"); 
+    retval=kv_set("nzvprfnq", "xwsayqsyppbthpbsqqckkfmyxdrwgolxx"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("rgqvwqql", "moiehgafyhqjeewaopsiilcasmllamsjobapkgouxsvlqqcdvogntuvwftklhqmfkebqzszjfluinsynmrwynbhvfctfpyhkygpgfpchsgqmvazzgvbwqvloeuqyjtga"); 
+    retval=kv_set("giloidpc", "jsjokogvgzhsaakjjnyxtzbbejoolgqnghukdjazjiaxsxyqqtrocyjnzvyf"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("ldcnbsfa", "fbdxsqhhcgkmfhgeefwoynyqemakdlajnsufbs"); 
+    retval=kv_set("abteuovs", "nklitdwpzvzomedggnjjpmyqxnatmlrgpjdxdcypqedcvsflglbybxdklywaxhchyafhayamjrxyeivqibgovioqizvgnkfgsuatdjjzibhyqepblxfmlyp"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("bgowuuha", "layaiyqwzznpiotbqvzcttvxgititktkdvd"); 
+    retval=kv_set("mbdrfohf", "dpeqcumwgoekveirhyxibpuegderjieinwyxznffibrehuzqeuszeggxflekxbgwvvbyyqyywbymgzubhahhoofycwmljtfnkxqbxfzkchyasawntzneynqkrmcyiown"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("qvixfnnu", "rhjpalknzdrluqarlncjpruoeiyckokmf"); 
+    retval=kv_set("yscclarg", "reaqevirrkvisexstuviapvhsxkczaoymi"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("rimmhojs", "szednyqjwjhvwvngdzsdamrouukzdozdqdxmfvmoduu"); 
+    retval=kv_set("faptkifi", "tuegfuruqcrxmodihjljduucydzegelsxxogrxrfjlpfikvnnlzdfatgompdeysqohfqzkukflzubaxlqoousttnsdwmesfeyxxicugqwzimko"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("hwewwtez", "chvgbkgfmsengevhasciqqvaynbkpaglj"); 
+    retval=kv_set("xlyahorj", "cysxghmterpkwdivjurqymrnorknakeysqatvlixzqqfadqdeuwlgewbsrnujwzxtwrlndfbhopucobifmliykfsvikomuhnrjwgcfaoqbwwlalhdglvjndownmjagtu"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("geqzbpts", "onkufzzcsudjvwnwbgttzjjyqjxwyielhfigf"); 
+    retval=kv_set("hpzluhnd", "zlsavprgswjkpcmqglqykynxgfewzgqtqw"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("tuyihjyc", "jkeeotkjuwywvmolzmbkcjkcfqzwtynzupyudecdvqfsfcwvdulluvnjwf"); 
+    retval=kv_set("vjczwqhp", "hjudsjgxzunrhsdqnnfysweykjtwjdtri"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("ueqbwqfk", "kzrmdsmnvpkikbcjjzesoklwiqqyrcmxf"); 
+    retval=kv_set("pezhjwar", "uuyvrhbpwdcgqjynowzkppehcxmwjtwchaphblvsex"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("shnggbkr", "akcvqyydrfrbemzspuvfymvvmqtvtytrxukzsoo"); 
+    retval=kv_set("igrndbef", "ujfihnhmqtgvvcezqgiqmszsknstfqeoa"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("beelmlrc", "mvdfjirzpssbaznmdsjvxqryovykfkahd"); 
+    retval=kv_set("zwtuqzvl", "hxuqjblfxslrooipbpeyzqbwloqtglgiwy"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("ebmqoobi", "qjqqgpicwhragccfaqxwhxmezhwnhhjdptzryzfsghhufblutrhpijkxwxvtfzkllwjaykicxpovn"); 
+    retval=kv_set("stvndmlg", "gytsbswlgqetecvoxmmpmymuuclridvcq"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("rebvzqgy", "oubkacetrdxcpmsletwvbdnqmrjlgwzurc"); 
+    retval=kv_set("bydcsvox", "xcmuntryvjdeipxvefctrwpulupfjizasi"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("yuuauwes", "ouumvlkeozxxiiznsbcrlgaztxfjmkgec"); 
+    retval=kv_set("igcarfyx", "benkupajqodcldnsxrnibjkdkqmwpstvfkvqkoaulwjdelaoqbgkks"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("fxilvwuw", "gbxtniaczhdldegcezkhgyrhmtrrtckcy"); 
+    retval=kv_set("jaeianzn", "lgmkkxpghdwwbbmbppcuaskzmborpofmewpzhamnecurtbwbypdfpumabcpbttkjnasemfevfynmliwdjtfdyfvymhqlnuwvnoqnbjvwugwynaxfxydtlhuyakxkyxfc"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("lboljuiq", "clrgubgjgfqkhtigbqyvqlutnjfazcmaq"); 
+    retval=kv_set("hmlnozmd", "xjkqaxqeoqxiuyqpwtfjpmpevdppvaarbxddsftttdzdqmapexkqcdyvbiycaxhtth"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("qkixbgsi", "szvrlpoehecyeaufddtppdpolhxkcntcnwclqwagibz"); 
+    retval=kv_set("mlbgopxo", "snpqyegrumptyvlfcyvsorxwpbhwnoumq"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("iplngwee", "yxksilcrnblmfkgnhupwtnlntidokgzsarvctctableg"); 
+    retval=kv_set("lpotryhv", "cazlcrtrucdgsmginjeguierxalokwjzw"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("dwjtwbad", "rvdmpcjkxmoeuierdqchtqoogqrvpnssw"); 
+    retval=kv_set("ymxjizbm", "uvllfmexexufllwatxlgxxgkffcftmeivnhdgmbdtkfazdshzvczwzoucqnrecttqxbbmrhmblnxrbukxurumonejahpassbwmvoykrnzsnjrdbzpbejsuxpmaheyioo"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("stuneevq", "ctukzeeveoyrlebryzfdnrwkjduqifsasfydyomwijnrsagkalcwreeyugvxxvribmjgwcgkiritjliskakjnrqdbatfyrtyvkijantptigukcwnvmrsfkbgbejdhaeh"); 
+    retval=kv_set("oovbaqfo", "blhkvzwxkcfxartlpzephpwabmpnmrxdu"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("ftvvqcwu", "uikeauiaoyfsojsumkoyhescylhybwsechelcise"); 
+    retval=kv_set("hbuxutwp", "wllqfcbwfcxzukwruoxxwdsmbixqdgekn"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("smxdrmof", "goozarialljsqvfyyhnsrpaaahnfmokapmbg"); 
+    retval=kv_set("cwkfjkry", "conlarvxeeswgtdyodqdgwniorbfkgkwpnxfkivdmjppawnfdepjqmecdnzaonxawempgzejyjhhwrzovkentfrhxyybdvuzrqemudkgzpnpqofbaktwokyhlmialhfz"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("hudytaku", "pvgvbphtnegrqwxrusxqoikwwojwihwriadcfxavb"); 
+    retval=kv_set("rnhxaneg", "pksvqyzrtnvcburzddbvcuhefowgqywyqseieebbtnotttfausnbuzmcxfsvfbnmlgnuhgatpvjtjq"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("gkmyqbsw", "tckfcfnjkohcxpygqbrnvkaxpeacjxvewchgmavnzpnm"); 
+    retval=kv_set("koctgcpd", "tpwdomtepihgwjeiiadwgxlvwjlrvcmxu"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("vbohtgda", "beuvdkodpmubvwcmegnljpldialqijacp"); 
+    retval=kv_set("nnbidywc", "rgggtufltcymrggnmskbtlpbambhempic"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("jodprmte", "hyiwbwslaxtpqpoudebfxkyyhrvnlctdz"); 
+    retval=kv_set("bpeeunuh", "lyewmoxiuxnqqrbsbanxszkotoburhjrs"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("smclezjr", "vjjeosfamycfkidpnkqmwvhlspacumbzk"); 
+    retval=kv_set("bqcjmlyj", "xnspswrwdvwlkmpfkxdkkngljiwdjiqrs"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("epsfsckm", "mcydjmpvywlishelvjtqixfgrbpnraphsoed"); 
+    retval=kv_set("rrqdbskz", "jocmvqjcofqurtfvkrrcmyvnclqsfbiphwklf"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("zjiaftqg", "kloafxlpzvdwurbtqrxwxucpzhppcnitj"); 
+    retval=kv_set("wkrememi", "yqtgmermphibyqeufmoglbxjztljsbzsi"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("ygmwvtnr", "usvbmudqqqeziibpfwfyljbredvbrdnct"); 
+    retval=kv_set("znyadnbg", "zcujmnxykbrvzwowfpvdxfyhdcrwljmpgvumgvgrelfstrleyqmqocthbn"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("ojozwrkd", "mabfozaftdmabbzywidkllbufpxdwpgwprlmcsbteaxgscmxptstodphvgyyrroesguomvbkxesxkstozkzennuegztcgfyxysxprnllpxgxzkvuuyfmnmianbijnqbf"); 
+    retval=kv_set("vttxtyrc", "foyrwyzcizrilhwolblkaquiftlycdeibc"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("zblynccn", "nsjglmzuiqldsydkoxazwcxsguehmzhxpcxuewf"); 
+    retval=kv_set("hwxzcucs", "bmjqyvzyzmqkgbqnahcmpgwhhojmpkxdsuz"); 
      if(retval>0) set_errors++; 
  
-    retval=kv_set("kvuomvzz", "xhyhrrldugkjqlvwgtvzlcxvnbfezqdlgj"); 
+    retval=kv_set("isrtiuvv", "zmrrsqqsmmvikwnwypctxdpkqmitdxzwpu"); 
      if(retval>0) set_errors++; 
  
 
-    valtmp = kv_get("hjvxlftv"); 
+    valtmp = kv_get("ijqoehjq"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("auibjewn"); 
+    valtmp = kv_get("odzuzdge"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("hjvxlftv"); 
+    valtmp = kv_get("ijqoehjq"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("hjvxlftv"); 
+    valtmp = kv_get("kgjdzmou"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("ltuplkff"); 
+    valtmp = kv_get("ijqoehjq"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("auibjewn"); 
+    valtmp = kv_get("kgjdzmou"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("hjvxlftv"); 
+    valtmp = kv_get("rfhwuoip"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("hjvxlftv"); 
+    valtmp = kv_get("kgjdzmou"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("hjvxlftv"); 
+    valtmp = kv_get("hakqxkkc"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("hjvxlftv"); 
+    valtmp = kv_get("odzuzdge"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("hjvxlftv"); 
+    valtmp = kv_get("odzuzdge"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("yjcqblbe"); 
+    valtmp = kv_get("kgjdzmou"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("hjvxlftv"); 
+    valtmp = kv_get("odzuzdge"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("gehwtqoc"); 
+    valtmp = kv_get("kgjdzmou"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("gehwtqoc"); 
+    valtmp = kv_get("odzuzdge"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("hjvxlftv"); 
+    valtmp = kv_get("ijqoehjq"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("tlyqnouo"); 
+    valtmp = kv_get("odzuzdge"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("hjvxlftv"); 
+    valtmp = kv_get("odzuzdge"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("gehwtqoc"); 
+    valtmp = kv_get("odzuzdge"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("hjvxlftv"); 
+    valtmp = kv_get("odzuzdge"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("hjvxlftv"); 
+    valtmp = kv_get("ijqoehjq"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("hjvxlftv"); 
+    valtmp = kv_get("odzuzdge"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("hjvxlftv"); 
+    valtmp = kv_get("odzuzdge"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("hjvxlftv"); 
+    valtmp = kv_get("hakqxkkc"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("auibjewn"); 
+    valtmp = kv_get("kgjdzmou"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("hjvxlftv"); 
+    valtmp = kv_get("odzuzdge"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("waroxtkv"); 
+    valtmp = kv_get("odzuzdge"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("hjvxlftv"); 
+    valtmp = kv_get("ynlqrbas"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("hjvxlftv"); 
+    valtmp = kv_get("odzuzdge"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("hjvxlftv"); 
+    valtmp = kv_get("odzuzdge"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("hjvxlftv"); 
+    valtmp = kv_get("kgjdzmou"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("hjvxlftv"); 
+    valtmp = kv_get("rqcdxqsp"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("hjvxlftv"); 
+    valtmp = kv_get("odzuzdge"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("ltuplkff"); 
+    valtmp = kv_get("odzuzdge"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("hjvxlftv"); 
+    valtmp = kv_get("odzuzdge"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("hjvxlftv"); 
+    valtmp = kv_get("odzuzdge"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("gehwtqoc"); 
+    valtmp = kv_get("odzuzdge"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("hjvxlftv"); 
+    valtmp = kv_get("kgjdzmou"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("hjvxlftv"); 
+    valtmp = kv_get("mvgjjgrv"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("yjcqblbe"); 
+    valtmp = kv_get("odzuzdge"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("gehwtqoc"); 
+    valtmp = kv_get("odzuzdge"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("anrpfcrh"); 
+    valtmp = kv_get("odzuzdge"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("hjvxlftv"); 
+    valtmp = kv_get("odzuzdge"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("gehwtqoc"); 
+    valtmp = kv_get("odzuzdge"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("hjvxlftv"); 
+    valtmp = kv_get("odzuzdge"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("yjcqblbe"); 
+    valtmp = kv_get("kgjdzmou"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("hjvxlftv"); 
+    valtmp = kv_get("kgjdzmou"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("yjcqblbe"); 
+    valtmp = kv_get("odzuzdge"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("gehwtqoc"); 
+    valtmp = kv_get("odzuzdge"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("hjvxlftv"); 
+    valtmp = kv_get("odzuzdge"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("hjvxlftv"); 
+    valtmp = kv_get("odzuzdge"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("yjcqblbe"); 
+    valtmp = kv_get("ijqoehjq"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("gehwtqoc"); 
+    valtmp = kv_get("odzuzdge"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("ltuplkff"); 
+    valtmp = kv_get("kgjdzmou"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("hjvxlftv"); 
+    valtmp = kv_get("jraghxoq"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("hjvxlftv"); 
+    valtmp = kv_get("odzuzdge"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("hjvxlftv"); 
+    valtmp = kv_get("odzuzdge"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("gehwtqoc"); 
+    valtmp = kv_get("odzuzdge"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("iawzaccc"); 
+    valtmp = kv_get("ynlqrbas"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("hjvxlftv"); 
+    valtmp = kv_get("odzuzdge"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("auibjewn"); 
+    valtmp = kv_get("kgjdzmou"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("yjcqblbe"); 
+    valtmp = kv_get("odzuzdge"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("hjvxlftv"); 
+    valtmp = kv_get("onuaylmt"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("hjvxlftv"); 
+    valtmp = kv_get("ynlqrbas"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("hjvxlftv"); 
+    valtmp = kv_get("ynlqrbas"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("hjvxlftv"); 
+    valtmp = kv_get("odzuzdge"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("anrpfcrh"); 
+    valtmp = kv_get("kgjdzmou"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("hjvxlftv"); 
+    valtmp = kv_get("odzuzdge"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("hjvxlftv"); 
+    valtmp = kv_get("kocgened"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("gehwtqoc"); 
+    valtmp = kv_get("odzuzdge"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("gehwtqoc"); 
+    valtmp = kv_get("odzuzdge"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("hjvxlftv"); 
+    valtmp = kv_get("kgjdzmou"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("hjvxlftv"); 
+    valtmp = kv_get("odzuzdge"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("anrpfcrh"); 
+    valtmp = kv_get("hakqxkkc"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("hjvxlftv"); 
+    valtmp = kv_get("odzuzdge"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("hjvxlftv"); 
+    valtmp = kv_get("odzuzdge"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("ltuplkff"); 
+    valtmp = kv_get("ccsywfdk"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("yjcqblbe"); 
+    valtmp = kv_get("kgjdzmou"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("hjvxlftv"); 
+    valtmp = kv_get("odzuzdge"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("zfdbdbjq"); 
+    valtmp = kv_get("odzuzdge"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("hjvxlftv"); 
+    valtmp = kv_get("odzuzdge"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("hjvxlftv"); 
+    valtmp = kv_get("odzuzdge"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("hjvxlftv"); 
+    valtmp = kv_get("odzuzdge"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("hjvxlftv"); 
+    valtmp = kv_get("odzuzdge"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("hjvxlftv"); 
+    valtmp = kv_get("odzuzdge"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("hjvxlftv"); 
+    valtmp = kv_get("ijqoehjq"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("hjvxlftv"); 
+    valtmp = kv_get("odzuzdge"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("rxepdjgl"); 
+    valtmp = kv_get("odzuzdge"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("ltuplkff"); 
+    valtmp = kv_get("kgjdzmou"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("hjvxlftv"); 
+    valtmp = kv_get("odzuzdge"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("hjvxlftv"); 
+    valtmp = kv_get("mtyakndm"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("hjvxlftv"); 
+    valtmp = kv_get("odzuzdge"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("hjvxlftv"); 
+    valtmp = kv_get("ynlqrbas"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("yjcqblbe"); 
+    valtmp = kv_get("odzuzdge"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("hjvxlftv"); 
+    valtmp = kv_get("odzuzdge"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("anrpfcrh"); 
+    valtmp = kv_get("mmvryhnt"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("hjvxlftv"); 
+    valtmp = kv_get("odzuzdge"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("hjvxlftv"); 
+    valtmp = kv_get("ijqoehjq"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("hjvxlftv"); 
+    valtmp = kv_get("kgjdzmou"); 
      if(valtmp==NULL) get_errors++; 
 
-    valtmp = kv_get("hjvxlftv"); 
+    valtmp = kv_get("mvgjjgrv"); 
      if(valtmp==NULL) get_errors++; 
 
-    printf("%d, %d \n",set_errors, get_errors)); 
+    printf("%d, %d \n",set_errors, get_errors); 
+ kv_reset(); 
  } 
