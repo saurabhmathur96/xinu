@@ -126,8 +126,20 @@ int kv_set(char* key, char* value)
         xfree(pair.key);
         xfree(pair.value);
     }
+
+    // check if key is already in cache
+    int i = find_string_pair(&kv_store, key);
+    if (i >= 0) 
+    {
+        // found => update value and set as most recently used
+        string_pair_t pair = remove_string_pair(&kv_store,  i);
+        xfree(pair.value);
+
+        return insert_back_string_pair(&kv_store, pair.key, duplicate_string(value));
+    }
+
+    // not found
     return insert_back_string_pair(&kv_store, duplicate_string(key), duplicate_string(value));
-    
 }
 
 char* kv_get(char* key)

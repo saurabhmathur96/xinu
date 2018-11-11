@@ -1,5 +1,5 @@
 
-#define N_BUFFERS 10
+#define N_BUFFERS 1000
 #define N_BUFFER_POOLS 10
 
 typedef struct {
