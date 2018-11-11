@@ -95,3 +95,6 @@ extern shellcmd xsh_prodcons(int nargs, char *args[]);
 
 /* in file xsh_xmalloc_test.c */
 extern shellcmd xsh_xmalloc_test(int nargs, char *args[]);
+
+/* in file xsh_kv.c */
+extern shellcmd xsh_kv(int nargs, char *args[]);
