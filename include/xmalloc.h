@@ -1,6 +1,6 @@
 
-#define N_BUFFERS 15
-#define N_BUFFER_POOLS 30
+#define N_BUFFERS 10
+#define N_BUFFER_POOLS 10
 
 typedef struct {
     char *buffer; /* address of buffer */
