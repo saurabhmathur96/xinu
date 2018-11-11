@@ -1,4 +1,4 @@
-#define KV_STORE_SIZE 100
+#define KV_STORE_SIZE 500
 
 
 typedef struct {
