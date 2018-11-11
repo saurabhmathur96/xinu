@@ -35,8 +35,8 @@ void* xmalloc(unsigned int size)
     intmask mask = disable();
     int i = 0;
     for (i=0; i<N_BUFFER_POOLS /* traverse from 0 to N_BUFFER_POOLS */
-           && !(buffer_pools[i].n_allocated == N_BUFFERS) /* skipping buffer pools that are full */
-           && size > buffer_pools[i].buffer_size; /* pass over buffer pools with block size smaller than requested size */
+           && (size > buffer_pools[i].buffer_size /* pass over buffer pools with block size smaller than requested size */
+               || (buffer_pools[i].n_allocated == N_BUFFERS)); /* skipping buffer pools that are full */
         i++) {}
     if (i == N_BUFFER_POOLS)
     {

@@ -1,5 +1,4 @@
 #include <xinu.h>
-#include <string.h>
 
 
 void string_pair_table_init(string_pair_table_t* table, int size)
@@ -44,7 +43,7 @@ int find_string_pair(string_pair_table_t *table, char *key)
             }
 
         }
-        else if (strcmp(table->entries[i].key, key) == 0) 
+        else if (strncmp(table->entries[i].key, key, strlen(table->entries[i].key)) == 0) 
         {
             // We were looking for a string key and we found a match
             return i;
@@ -114,6 +113,7 @@ string_pair_t remove_string_pair(string_pair_table_t* table, int index)
 
 int kv_init()
 {
+    xmalloc_init();
     string_pair_table_init(&kv_store, KV_STORE_SIZE);
     return 0;
 }
