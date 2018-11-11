@@ -1,6 +1,15 @@
 #include <xinu.h>
 
 
+void print_string_table(string_pair_table_t* table)
+{
+    int i;
+    for (i=0; i<table->size; i++)
+    {
+        printf("%d %s %s\n", i, table->entries[i].key, table->entries[i].value);
+    }
+}
+
 void string_pair_table_init(string_pair_table_t* table, int size)
 {
     table->size = size;
@@ -103,11 +112,14 @@ string_pair_t remove_string_pair(string_pair_table_t* table, int index)
     table->entries[target] = (string_pair_t) { .key=NULL, .value=NULL };
 
     int i;
-    for(i=target; i<table->size-1; i++)
+    for(i=target; i<table->n_entries; i++)
     {
         table->entries[i] = table->entries[i+1];
     }
+    table->entries[i].key = NULL;
+    
     table->n_entries -= 1;
+    
     return removed_pair;
 }
 

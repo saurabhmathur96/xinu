@@ -12,63 +12,7 @@ shellcmd xsh_kv(int nargs, char *args[])
     kv_init(); 
 
 
-    retval=kv_set("ctttjyhm", "rmxrodelucysiaytouifbtryfcdveypsjw"); 
-     if(retval>0) set_errors++; 
- 
-    retval=kv_set("odzuzdge", "txegveaskmlwxkpnrzmurhsbyrrxqudjgrpxom"); 
-     if(retval>0) set_errors++; 
- 
-    retval=kv_set("kgjdzmou", "ysrmvfneqeyjllycbxqmtyryhrdibymzok"); 
-     if(retval>0) set_errors++; 
- 
-    retval=kv_set("ijqoehjq", "gzirqtbalnhriihrbuusfuaqrpkopniecqsqdtzpxqdst"); 
-     if(retval>0) set_errors++; 
- 
-    retval=kv_set("ynlqrbas", "gyyempdvkcdzonpilwvqfqmpsqpbmmrscawqgbuqpdagmazpvzehkocwuuyoxxrp"); 
-     if(retval>0) set_errors++; 
- 
-    retval=kv_set("hakqxkkc", "yfcoxahjbzpcyallsgioezlyqnsbadvqxt"); 
-     if(retval>0) set_errors++; 
- 
-    retval=kv_set("wkgftqxb", "dtpcbbnqzqjhuveyxehkebiawcemoolsl"); 
-     if(retval>0) set_errors++; 
- 
-    retval=kv_set("mvgjjgrv", "yihhepvzdsrwqpummctenmuwszqwnarxz"); 
-     if(retval>0) set_errors++; 
- 
-    retval=kv_set("rfhwuoip", "gawhpcruuirnunlpaqfznwiwcreaqirmm"); 
-     if(retval>0) set_errors++; 
- 
-    retval=kv_set("nvyibnyx", "lkjjggxjzkbowapsrilfgfkdatrycrktrsxbmimueoobazvpacgjmsfvgrgxscpfopkowjzcjxq"); 
-     if(retval>0) set_errors++; 
- 
-    retval=kv_set("mtyakndm", "ivccbgnyhkcybyipmltlzhrkhwmuvuxgmvbfbdtabehxslxgasoqnsmozyelhvvwplxgsswngmccivqqupkndyxqhbfvhrhgofjyyhqppvkrvauiou"); 
-     if(retval>0) set_errors++; 
- 
-    retval=kv_set("kocgened", "npfyxbapmysgusnnslacqydjmzhceeymw"); 
-     if(retval>0) set_errors++; 
- 
-    retval=kv_set("onuaylmt", "zqntdjbtdzszjzvlkjtjmmgmeycrboswx"); 
-     if(retval>0) set_errors++; 
- 
-    retval=kv_set("ogybhjed", "aodzucbqffxbmaluyawyktskodqgxgirw"); 
-     if(retval>0) set_errors++; 
- 
-    retval=kv_set("urlnnweb", "noqekplzdbqufojzxgoqqokfxoakdokwaxalain"); 
-     if(retval>0) set_errors++; 
- 
-    retval=kv_set("mmvryhnt", "mdqfxfzicdzjkeduzjqfalakefnyuexdrtrorceodogdstrc"); 
-     if(retval>0) set_errors++; 
- 
-    retval=kv_set("rqcdxqsp", "pmfdjdxhdpvsyxyhxyhzyifjtlcegypdkl"); 
-     if(retval>0) set_errors++; 
- 
-    retval=kv_set("vikovupl", "ddjxoxaedtcweybizdosaobmogzyesnjv"); 
-     if(retval>0) set_errors++; 
- 
-    retval=kv_set("tmiuuwby", "lfmbltdcyactwpbmzhwgkkmrhsmihsela"); 
-     if(retval>0) set_errors++; 
- 
+    
     retval=kv_set("fadgfbvk", "dzzdkzgcesdjgbagjkepycfqvjciwaicdhotlsf"); 
      if(retval>0) set_errors++; 
  
@@ -395,8 +339,64 @@ shellcmd xsh_kv(int nargs, char *args[])
  
     retval=kv_set("isrtiuvv", "zmrrsqqsmmvikwnwypctxdpkqmitdxzwpu"); 
      if(retval>0) set_errors++; 
- 
 
+    retval=kv_set("ctttjyhm", "rmxrodelucysiaytouifbtryfcdveypsjw"); 
+     if(retval>0) set_errors++; 
+ 
+    retval=kv_set("odzuzdge", "txegveaskmlwxkpnrzmurhsbyrrxqudjgrpxom"); 
+     if(retval>0) set_errors++; 
+ 
+    retval=kv_set("kgjdzmou", "ysrmvfneqeyjllycbxqmtyryhrdibymzok"); 
+     if(retval>0) set_errors++; 
+ 
+    retval=kv_set("ijqoehjq", "gzirqtbalnhriihrbuusfuaqrpkopniecqsqdtzpxqdst"); 
+     if(retval>0) set_errors++; 
+ 
+    retval=kv_set("ynlqrbas", "gyyempdvkcdzonpilwvqfqmpsqpbmmrscawqgbuqpdagmazpvzehkocwuuyoxxrp"); 
+     if(retval>0) set_errors++; 
+ 
+    retval=kv_set("hakqxkkc", "yfcoxahjbzpcyallsgioezlyqnsbadvqxt"); 
+     if(retval>0) set_errors++; 
+ 
+    retval=kv_set("wkgftqxb", "dtpcbbnqzqjhuveyxehkebiawcemoolsl"); 
+     if(retval>0) set_errors++; 
+ 
+    retval=kv_set("mvgjjgrv", "yihhepvzdsrwqpummctenmuwszqwnarxz"); 
+     if(retval>0) set_errors++; 
+ 
+    retval=kv_set("rfhwuoip", "gawhpcruuirnunlpaqfznwiwcreaqirmm"); 
+     if(retval>0) set_errors++; 
+ 
+    retval=kv_set("nvyibnyx", "lkjjggxjzkbowapsrilfgfkdatrycrktrsxbmimueoobazvpacgjmsfvgrgxscpfopkowjzcjxq"); 
+     if(retval>0) set_errors++; 
+ 
+    retval=kv_set("mtyakndm", "ivccbgnyhkcybyipmltlzhrkhwmuvuxgmvbfbdtabehxslxgasoqnsmozyelhvvwplxgsswngmccivqqupkndyxqhbfvhrhgofjyyhqppvkrvauiou"); 
+     if(retval>0) set_errors++; 
+ 
+    retval=kv_set("kocgened", "npfyxbapmysgusnnslacqydjmzhceeymw"); 
+     if(retval>0) set_errors++; 
+ 
+    retval=kv_set("onuaylmt", "zqntdjbtdzszjzvlkjtjmmgmeycrboswx"); 
+     if(retval>0) set_errors++; 
+ 
+    retval=kv_set("ogybhjed", "aodzucbqffxbmaluyawyktskodqgxgirw"); 
+     if(retval>0) set_errors++; 
+ 
+    retval=kv_set("urlnnweb", "noqekplzdbqufojzxgoqqokfxoakdokwaxalain"); 
+     if(retval>0) set_errors++; 
+ 
+    retval=kv_set("mmvryhnt", "mdqfxfzicdzjkeduzjqfalakefnyuexdrtrorceodogdstrc"); 
+     if(retval>0) set_errors++; 
+ 
+    retval=kv_set("rqcdxqsp", "pmfdjdxhdpvsyxyhxyhzyifjtlcegypdkl"); 
+     if(retval>0) set_errors++; 
+ 
+    retval=kv_set("vikovupl", "ddjxoxaedtcweybizdosaobmogzyesnjv"); 
+     if(retval>0) set_errors++; 
+ 
+    retval=kv_set("tmiuuwby", "lfmbltdcyactwpbmzhwgkkmrhsmihsela"); 
+     if(retval>0) set_errors++; 
+ 
     valtmp = kv_get("ijqoehjq"); 
      if(valtmp==NULL) get_errors++; 
 
