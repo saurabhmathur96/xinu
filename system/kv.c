@@ -17,7 +17,7 @@ void string_pair_table_init(string_pair_table_t* table, int size)
 
 int string_pair_table_is_full(string_pair_table_t* table)
 {
-    return table->size == table->n_entries-1;
+    return table->size == table->n_entries;
 }
 
 char *duplicate_string(char* string)
@@ -107,6 +107,7 @@ string_pair_t remove_string_pair(string_pair_table_t* table, int index)
     {
         table->entries[i] = table->entries[i+1];
     }
+    table->n_entries -= 1;
     return removed_pair;
 }
 
@@ -150,7 +151,7 @@ char* kv_get(char* key)
         return NULL;
     }
     string_pair_t pair = remove_string_pair(&kv_store, target);
-    insert_front_string_pair(&kv_store, pair.key, pair.value);
+    insert_back_string_pair(&kv_store, pair.key, pair.value);
     return pair.value;
 }
 
