@@ -1,6 +1,5 @@
-#include <string.h>
 #include <xinu.h>
-
+#include <string.h>
 
 
 void string_pair_table_init(string_pair_table_t* table, int size)
