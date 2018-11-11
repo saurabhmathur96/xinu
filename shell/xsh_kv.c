@@ -1,6 +1,6 @@
 /* xsh_kv.c - xsh_kv */
 
-
+#include <stdio.h>
 #include <xinu.h>
 
 shellcmd xsh_kv(int nargs, char *args[])

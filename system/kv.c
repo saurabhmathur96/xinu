@@ -1,5 +1,6 @@
-#include <xinu.h>
 #include <string.h>
+#include <xinu.h>
+
 
 
 void string_pair_table_init(string_pair_table_t* table, int size)
@@ -26,6 +27,7 @@ char *duplicate_string(char* string)
     int length = strlen(string);
     char* duplicate = xmalloc(sizeof(*duplicate) * (length+1));
     strncpy(duplicate, string, length);
+    return duplicate;
 }
 
 
