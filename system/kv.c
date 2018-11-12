@@ -155,7 +155,7 @@ string_pair_t remove_string_pair(string_pair_table_t* table, int index)
 int lru_kv_set(string_pair_table_t* store, char* key, char* value)
 {
     if (string_pair_table_is_full(store)) 
-    {_
+    {
         string_pair_t pair = remove_string_pair(store,  0);
         kv_stats.cache_size -= (strlen(pair.key) + strlen(pair.value));
         xfree(pair.key);
