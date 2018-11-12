@@ -296,27 +296,27 @@ char** most_popular_keys(int k)
 
 int get_cache_info(char* kind)
 {
-    if (0 == strncmp(kind, "total_hits", strlen("total_hits"))
+    if (0 == strncmp(kind, "total_hits", strlen("total_hits")))
     {
         return kv_stats.total_hits;
     }
-    else if (0 == strncmp(kind, "total_accesses", strlen("total_accesses"))
+    else if (0 == strncmp(kind, "total_accesses", strlen("total_accesses")))
     {
         return kv_stats.total_accesses;
     }
-    else if (0 == strncmp(kind, "total_set_success", strlen("total_set_success"))
+    else if (0 == strncmp(kind, "total_set_success", strlen("total_set_success")))
     {
         return kv_stats.total_set_success;
     }
-    else if (0 == strncmp(kind, "cache_size", strlen("cache_size"))
+    else if (0 == strncmp(kind, "cache_size", strlen("cache_size")))
     {
         return kv_stats.cache_size;
     }
-    else if (0 == strncmp(kind, "num_keys", strlen("num_keys"))
+    else if (0 == strncmp(kind, "num_keys", strlen("num_keys")))
     {
         return kv_stats.num_keys;
     }
-    else if (0 == strncmp(kind, "total_evictions", strlen("total_evictions"))
+    else if (0 == strncmp(kind, "total_evictions", strlen("total_evictions")))
     {
         return kv_stats.total_evictions
     }
