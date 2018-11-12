@@ -22,7 +22,9 @@ typedef struct {
     string_pair_table_t t2;
     string_pair_table_t b2;
     int p;
-} arc_cache_t;
+} arc_store_t;
+
+arc_store_t arc_kv_store;
 
 typedef struct {
     int total_hits;

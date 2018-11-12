@@ -152,15 +152,15 @@ string_pair_t remove_string_pair(string_pair_table_t* table, int index)
  * LRU Cache implementation
  */
 
-int lru_kv_set(string_pair_table_t* store, char* key, char* value)
+int lru_kv_set(string_pair_table_t* store, kv_stats_t* stats, char* key, char* value)
 {
     if (string_pair_table_is_full(store)) 
     {
         string_pair_t pair = remove_string_pair(store,  0);
-        kv_stats.cache_size -= (strlen(pair.key) + strlen(pair.value));
+        stats->cache_size -= (strlen(pair.key) + strlen(pair.value));
         xfree(pair.key);
         xfree(pair.value);
-        kv_stats.total_evictions++;
+        stats->total_evictions += 1;
     }
     
 
@@ -170,31 +170,33 @@ int lru_kv_set(string_pair_table_t* store, char* key, char* value)
     {
         // found => update value and set as most recently used
         string_pair_t pair = remove_string_pair(store,  i);
-        kv_stats.cache_size += (strlen(value) - strlen(pair.value)) ;
+        stats->cache_size += (strlen(value) - strlen(pair.value)) ;
         xfree(pair.value);
 
         return insert_back_string_pair(store, pair.key, duplicate_string(value));
     }
 
     // not found 
-    kv_stats.cache_size += (strlen(key) + strlen(value));
-    kv_stats.num_keys += 1;
+    stats->cache_size += (strlen(key) + strlen(value));
+    stats->num_keys += 1;
     return insert_back_string_pair(store, duplicate_string(key), duplicate_string(value));
 }
 
-char* lru_kv_get(string_pair_table_t* store, char* key)
+char* lru_kv_get(string_pair_table_t* store, kv_stats_t* stats, char* key)
 {
+    stats->total_accesses += 1;
     int target = find_string_pair(store, key);
     if (target<0)
     {
         return NULL;
     }
+    stats->total_hits += 1;
     string_pair_t pair = remove_string_pair(store, target);
     insert_back_string_pair(store, pair.key, pair.value);
     return pair.value;
 }
 
-int lru_kv_delete(string_pair_table_t* store, char* key)
+int lru_kv_delete(string_pair_table_t* store, kv_stats_t* stats , char* key)
 {
     int index = find_string_pair(store, key);
     if (index < 0)
@@ -202,29 +204,255 @@ int lru_kv_delete(string_pair_table_t* store, char* key)
         return 0;
     }
     string_pair_t pair = remove_string_pair(store, index);
-    kv_stats.cache_size -= (strlen(pair.key) + strlen(pair.value));
-    kv_stats.num_keys -= 1;
+    stats->cache_size -= (strlen(pair.key) + strlen(pair.value));
+    stats->num_keys -= 1;
     xfree(pair.key);
     xfree(pair.value);
     return 1;
 }
 
 
+/**
+ * ARC Implementation
+ */
+
 int arc_kv_set(char* key, char* value)
 {
-    //
-    return 0;
+    if (string_pair_table_is_full(&(arc_kv_store.t1)))
+    {
+        // t1 is full => evict from t1 and  add to b1
+        string_pair_t pair = remove_string_pair(&(arc_kv_store.t1),  0);
+        kv_stats_t stats = (kv_stats_t) { .total_hits=0, .total_accesses=0, .total_set_success=0, 
+                                            .cache_size=0, .num_keys=0, .total_evictions=0 };
+        lru_kv_set(&(arc_kv_store.b1), &stats, pair.key, pair.value);
+        kv_stats.total_evictions += stats.total_evictions;
+
+    }
+
+    int i;
+    // check if key is already in t1
+    i = find_string_pair(&(arc_kv_store.t1), key);
+    if (i >= 0) 
+    {
+        // found => update value
+        string_pair_t pair = remove_string_pair(&(arc_kv_store.t1),  i);
+        kv_stats.cache_size += (strlen(value) - strlen(pair.value));
+        xfree(pair.value);
+
+        return insert_back_string_pair(&(arc_kv_store.t1), pair.key, duplicate_string(value));
+    }
+
+    // check if key is already in t2
+    i = find_string_pair(&(arc_kv_store.t2), key);
+    if (i >= 0) 
+    {
+        // found => update value
+        string_pair_t pair = remove_string_pair(&(arc_kv_store.t2),  i);
+        kv_stats.cache_size += (strlen(value) - strlen(pair.value));
+        xfree(pair.value);
+
+        return insert_back_string_pair(&(arc_kv_store.t2), pair.key, duplicate_string(value));
+    }
+
+    // check if key is already in b1
+    i = find_string_pair(&(arc_kv_store.b1), key);
+    if (i >= 0) 
+    {
+        // found => update value, add to t1
+        string_pair_t pair = remove_string_pair(&(arc_kv_store.b1),  i);
+        kv_stats.cache_size += (strlen(value) - strlen(pair.value));
+        xfree(pair.value);
+
+        return insert_back_string_pair(&(arc_kv_store.t1), pair.key, duplicate_string(value));
+    }
+
+    // check if key is already in b2
+    i = find_string_pair(&(arc_kv_store.b2), key);
+    if (i >= 0) 
+    {
+        // found => update value, add to t1
+        string_pair_t pair = remove_string_pair(&(arc_kv_store.b2),  i);
+        kv_stats.cache_size += (strlen(value) - strlen(pair.value));
+        xfree(pair.value);
+
+        return insert_back_string_pair(&(arc_kv_store.t1), pair.key, duplicate_string(value));
+    }
+
+    
+
+    // not found in t1 or t2 => insert into t1
+    kv_stats.cache_size += (strlen(key) + strlen(value));
+    kv_stats.num_keys += 1;
+    return insert_back_string_pair(&(arc_kv_store.t1), duplicate_string(key), duplicate_string(value));
 }
 
 char* arc_kv_get(char* key)
 {
-    //
+    int target, delta;
+    // Look for key in t2
+    target = find_string_pair(&(arc_kv_store.t2), key);
+    if (target >= 0)
+    {
+        // Case 1: if found shift to MRU of t2
+        string_pair_t pair = remove_string_pair(&(arc_kv_store.t2), target);
+        if (string_pair_table_is_full(&(arc_kv_store.t2)))
+        {
+            // t2 is full => evict from t2 and  add to b2
+            string_pair_t pair = remove_string_pair(&(arc_kv_store.t2),  0);
+            kv_stats_t stats = (kv_stats_t) { .total_hits=0, .total_accesses=0, .total_set_success=0, 
+                                            .cache_size=0, .num_keys=0, .total_evictions=0 };
+            lru_kv_set(&(arc_kv_store.b2), &stats, pair.key, pair.value);
+            kv_stats.total_evictions += stats.total_evictions;
+        }
+        insert_back_string_pair(&(arc_kv_store.t2), pair.key, pair.value);
+        return pair.value;
+    }
+
+    // Look for key in t1
+    target = find_string_pair(&(arc_kv_store.t1), key);
+    if (target >= 0)
+    {
+        // Case 1: if found shift to MRU of t2
+        string_pair_t pair = remove_string_pair(&(arc_kv_store.t1), target);
+        if (string_pair_table_is_full(&(arc_kv_store.t2)))
+        {
+            // t2 is full => evict from t2 and  add to b2
+            string_pair_t pair = remove_string_pair(&(arc_kv_store.t2),  0);
+            kv_stats_t stats = (kv_stats_t) { .total_hits=0, .total_accesses=0, .total_set_success=0, 
+                                            .cache_size=0, .num_keys=0, .total_evictions=0 };
+            lru_kv_set(&(arc_kv_store.b2), &stats, pair.key, pair.value);
+            kv_stats.total_evictions += stats.total_evictions;
+        }
+        insert_back_string_pair(&(arc_kv_store.t2), pair.key, pair.value);
+        return pair.value;
+    }
+
+    // Look for key in b1
+    target = find_string_pair(&(arc_kv_store.b1), key);
+    if (target >= 0)
+    {
+        string_pair_t pair = remove_string_pair(&(arc_kv_store.b1), target);
+        // shift pair retrieved from b1 to MRU of t2
+        insert_back_string_pair(&(arc_kv_store.t2), pair.key, pair.value);
+
+
+        // Case 2: compute p and call Replace(x_t, p)
+        int b1 = arc_kv_store.b1.n_entries;
+        int b2 = arc_kv_store.b2.n_entries
+        delta = b1 >= b2 ? 1 : (b2 / b1);
+
+        int p = arc_kv_store.p;
+        int c = arc_kv_store.size;
+        p = p+delta;
+        p = p < c ? p : c; // min{p+delta, c}
+        arc_kv_store.p = p;
+
+        int t1_length = arc_kv_store.t1.n_entries;
+        if (t1_length > 0 && t1_length > p) 
+        {
+            // evict from t1 and move to b1
+            string_pair_t p = remove_string_pair(&(arc_kv_store.t1),  0);
+            lru_kv_set(&(arc_kv_store.b1), p.key, p.value);
+        }
+        else
+        {
+            // evict from t2 and move to b2
+            string_pair_t p = remove_string_pair(&(arc_kv_store.t2),  0);
+            lru_kv_set(&(arc_kv_store.b2), p.key, p.value);
+        }
+
+        
+        return pair.value;
+    }
+
+    // Look for key in b2
+    target = find_string_pair(&(arc_kv_store.b2), key);
+    if (target >= 0)
+    {
+
+        // shift pair retrieved from b2 to MRU of t2
+        string_pair_t pair = remove_string_pair(&(arc_kv_store.b2), target);
+        insert_back_string_pair(&(arc_kv_store.t2), pair.key, pair.value);
+
+        // Case 3: compute p and call Replace(x_t, p)
+        int b1 = arc_kv_store.b1.n_entries;
+        int b2 = arc_kv_store.b2.n_entries
+        delta = b2 >= b1 ? 1 : (b1 / b2);
+
+        int p = arc_kv_store.p;
+        p = p-delta;
+        p = p > 0 ? p : 0; // max{p-delta, 0}
+        arc_kv_store.p = p;
+        
+        int t1_length = arc_kv_store.t1.n_entries;
+        if (t1_length > 0 && t1_length >= p)
+        {
+            // evict from t1 and move to b1
+            string_pair_t p = remove_string_pair(&(arc_kv_store.t1),  0);
+            lru_kv_set(&(arc_kv_store.b1), p.key, p.value);
+        }
+        else
+        {
+            // evict from t2 and move to b2
+            string_pair_t p = remove_string_pair(&(arc_kv_store.t2),  0);
+            lru_kv_set(&(arc_kv_store.b2), p.key, p.value);
+        }
+        
+        return pair.value;
+    }
+
+    // Not found anywhere
+    
     return NULL;
 }
 
 
 int arc_kv_delete(char* key)
 {
+    kv_stats_t stats;
+    int return_value;
+
+    stats = (kv_stats_t) { .total_hits=0, .total_accesses=0, .total_set_success=0, 
+                           .cache_size=0, .num_keys=0, .total_evictions=0 };
+    return_value = lru_kv_delete(&(arc_kv_store.t1), &stats, pair.key);
+    if (return_value == 1)
+    {
+        kv_stats->cache_size += stats.cache_size;
+        kv_stats->num_keys += stats.num_keys;
+        return 1;
+    }
+
+    stats = (kv_stats_t) { .total_hits=0, .total_accesses=0, .total_set_success=0, 
+                           .cache_size=0, .num_keys=0, .total_evictions=0 };
+    return_value = lru_kv_delete(&(arc_kv_store.t2), &stats, pair.key);
+    if (return_value == 1)
+    {
+        kv_stats->cache_size += stats.cache_size;
+        kv_stats->num_keys += stats.num_keys;
+        return 1;
+    }
+
+    stats = (kv_stats_t) { .total_hits=0, .total_accesses=0, .total_set_success=0, 
+                           .cache_size=0, .num_keys=0, .total_evictions=0 };
+    return_value = lru_kv_delete(&(arc_kv_store.b1), &stats, pair.key);
+    if (return_value == 1)
+    {
+        kv_stats->cache_size += stats.cache_size;
+        kv_stats->num_keys += stats.num_keys;
+        return 1;
+    }
+
+    stats = (kv_stats_t) { .total_hits=0, .total_accesses=0, .total_set_success=0, 
+                           .cache_size=0, .num_keys=0, .total_evictions=0 };
+    return_value = lru_kv_delete(&(arc_kv_store.b2), &stats, pair.key);
+    if (return_value == 1)
+    {
+        kv_stats->cache_size += stats.cache_size;
+        kv_stats->num_keys += stats.num_keys;
+        return 1;
+    }
+
+    // Not found in any of the four lists
     return 0;
 }
 
@@ -248,26 +476,32 @@ int kv_init(replacement_policy_t policy)
         kv_replacement_policy = policy;
         string_pair_table_init(&lru_kv_store, KV_STORE_SIZE);
     }
+    else if (policy == ARC)
+    {
+        kv_replacement_policy = policy;
+        string_pair_table_init(&(arc_kv_store.t1), KV_STORE_SIZE);
+        string_pair_table_init(&(arc_kv_store.t2), KV_STORE_SIZE);
+        string_pair_table_init(&(arc_kv_store.b1), KV_STORE_SIZE);
+        string_pair_table_init(&(arc_kv_store.b2), KV_STORE_SIZE);
+        arc_kv_store.p = 0;
+
+
+    }
     return 0;
 }
 
 char* kv_get(char* key)
 {
-    kv_stats.total_accesses++;
-    
     char* return_value;
     switch(kv_replacement_policy)
     {
         case LRU:
-            return_value = lru_kv_get(&lru_kv_store, key);
+            return_value = lru_kv_get(&lru_kv_store, &kv_stats, key);
 
         default:
-            return_value = lru_kv_get(&lru_kv_store, key);
+            return_value = lru_kv_get(&lru_kv_store, &kv_stats, key);
     }
-    if (return_value != NULL)
-    {
-        kv_stats.total_hits++;
-    }
+    
     return return_value;
 }
 
@@ -277,11 +511,11 @@ int kv_set(char* key, char* value)
     switch(kv_replacement_policy)
     {
         case LRU:
-            return_value = lru_kv_set(&lru_kv_store, key, value);
+            return_value = lru_kv_set(&lru_kv_store, &kv_stats, key, value);
             break;
 
         default:
-            return_value = lru_kv_set(&lru_kv_store, key, value);
+            return_value = lru_kv_set(&lru_kv_store, &kv_stats, key, value);
             break;
     }
 
