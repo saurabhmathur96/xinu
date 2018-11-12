@@ -219,7 +219,7 @@ int arc_kv_set(char* key, char* value)
 char* arc_kv_get(char* key)
 {
     //
-    return NULL
+    return NULL;
 }
 
 
