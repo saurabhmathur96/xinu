@@ -39,7 +39,7 @@ typedef enum { LRU, ARC } replacement_policy_t;
 
 replacement_policy_t kv_replacement_policy;
 
-int kv_init();
+int kv_init(replacement_policy_t policy);
 char* kv_get(char* key);
 int kv_set(char* key, char* value);
 int kv_delete(char* key);
