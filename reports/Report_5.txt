@@ -1,0 +1,23 @@
+I implemented the key value store as follows
+
+## Data Structures
+The main data structure uses is the string_table_t. It consists of an array of key-value pairs,
+the count of number of entries in it (n_entries) and the total capacity of the array (size).
+
+For the LRU cache, I have used the string table directly as the cache. It is maintained such that
+all the empty spaces, denoted by NULL are at the end of the array.
+
+For the ARC cache, I have used four string tables one each for t1, t2, b1 and b2. 
+
+## API 
+The KV API consists of kv_init, kv_get, kv_set, kv_delete, kv_reset, most_popular_keys, get_cache_info.
+The cache implementation is decided by an enum parameter (having value as LRU or ARC) to kv_init.
+Each of the API functions have a switch case on the enum which calls the appropriate underlying implementation function.
+For example, kv_get will call lru_kv_get or arc_kv_get depending on the value of the enum.
+
+Since, there is no way to retrieve pages evicted from the key value store, Case 4 of ARC has been ignored. If there
+is a cache miss in t1, t2, b1 and b2 then NULL is returned.
+
+## Design Considerations
+If a key or a value is larger than 64 bytes or 1KB respectively, an error is thrown.
+All memory comes from xmalloc and is freed using xfree.

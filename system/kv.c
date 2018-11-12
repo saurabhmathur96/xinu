@@ -524,6 +524,10 @@ char* kv_get(char* key)
 
 int kv_set(char* key, char* value)
 {
+    if (strlen(key) > 64 || strlen(value) > 1024)
+    {
+        return 1;
+    }
     int return_value;
     switch(kv_replacement_policy)
     {
@@ -623,5 +627,14 @@ void kv_reset()
     if (kv_replacement_policy == LRU)
     {
         string_pair_table_destroy(&lru_kv_store);
+    }
+    else if (kv_replacement_policy == ARC)
+    {
+        arc_kv_store.p = 0;
+        string_pair_table_destroy(&(arc_kv_store.t1));
+        string_pair_table_destroy(&(arc_kv_store.t2));
+        string_pair_table_destroy(&(arc_kv_store.b1));
+        string_pair_table_destroy(&(arc_kv_store.b2));
+        
     }
 }
