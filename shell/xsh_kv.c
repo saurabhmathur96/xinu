@@ -9,7 +9,7 @@ shellcmd xsh_kv(int nargs, char *args[])
      int set_errors = 0; 
      char* valtmp=NULL; 
      int get_errors=0; 
-    replacement_policy_t policy = LRU;
+    replacement_policy_t policy = ARC;
     kv_init(policy); 
 
 

@@ -509,6 +509,11 @@ char* kv_get(char* key)
     {
         case LRU:
             return_value = lru_kv_get(&lru_kv_store, &kv_stats, key);
+            break;
+        
+        case ARC:
+            return_value = arc_kv_get(&arc_kv_store, key);
+            break;
 
         default:
             return_value = lru_kv_get(&lru_kv_store, &kv_stats, key);
@@ -524,6 +529,10 @@ int kv_set(char* key, char* value)
     {
         case LRU:
             return_value = lru_kv_set(&lru_kv_store, &kv_stats, key, value);
+            break;
+        
+        case ARC:
+            return_value = arc_kv_set(&arc_kv_store, key, value);
             break;
 
         default:
@@ -544,6 +553,11 @@ int kv_delete(char* key)
     {
         case LRU:
             return lru_kv_delete(&lru_kv_store, &kv_stats, key);
+            break;
+        
+        case ARC:
+            return arc_kv_delete(&arc_kv_delete, key);
+            break;
 
         default:
             return lru_kv_delete(&lru_kv_store, &kv_stats, key);
