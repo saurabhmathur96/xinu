@@ -1,5 +1,8 @@
 #include <xinu.h>
 
+/**
+ * String Table API
+ */
 
 void print_string_table(string_pair_table_t* table)
 {
@@ -145,12 +148,15 @@ string_pair_t remove_string_pair(string_pair_table_t* table, int index)
 }
 
 
+/**
+ * LRU Cache implementation
+ */
 
-int lru_kv_set(char* key, char* value)
+int lru_kv_set(string_pair_table_t* store, char* key, char* value)
 {
-    if (string_pair_table_is_full(&lru_kv_store)) 
+    if (string_pair_table_is_full(lru_kv_store)) 
     {
-        string_pair_t pair = remove_string_pair(&lru_kv_store,  0);
+        string_pair_t pair = remove_string_pair(store,  0);
         kv_stats.cache_size -= (strlen(pair.key) + strlen(pair.value));
         xfree(pair.key);
         xfree(pair.value);
@@ -159,43 +165,43 @@ int lru_kv_set(char* key, char* value)
     
 
     // check if key is already in cache
-    int i = find_string_pair(&lru_kv_store, key);
+    int i = find_string_pair(store, key);
     if (i >= 0) 
     {
         // found => update value and set as most recently used
-        string_pair_t pair = remove_string_pair(&lru_kv_store,  i);
+        string_pair_t pair = remove_string_pair(store,  i);
         kv_stats.cache_size += (strlen(value) - strlen(pair.value)) ;
         xfree(pair.value);
 
-        return insert_back_string_pair(&lru_kv_store, pair.key, duplicate_string(value));
+        return insert_back_string_pair(store, pair.key, duplicate_string(value));
     }
 
     // not found 
     kv_stats.cache_size += (strlen(key) + strlen(value));
     kv_stats.num_keys += 1;
-    return insert_back_string_pair(&lru_kv_store, duplicate_string(key), duplicate_string(value));
+    return insert_back_string_pair(store, duplicate_string(key), duplicate_string(value));
 }
 
-char* lru_kv_get(char* key)
+char* lru_kv_get(string_pair_table_t* store, char* key)
 {
-    int target = find_string_pair(&lru_kv_store, key);
+    int target = find_string_pair(store, key);
     if (target<0)
     {
         return NULL;
     }
-    string_pair_t pair = remove_string_pair(&lru_kv_store, target);
-    insert_back_string_pair(&lru_kv_store, pair.key, pair.value);
+    string_pair_t pair = remove_string_pair(store, target);
+    insert_back_string_pair(store, pair.key, pair.value);
     return pair.value;
 }
 
-int lru_kv_delete(char* key)
+int lru_kv_delete(string_pair_table_t* store, char* key)
 {
-    int index = find_string_pair(&lru_kv_store, key);
+    int index = find_string_pair(store, key);
     if (index < 0)
     {
         return 0;
     }
-    string_pair_t pair = remove_string_pair(&lru_kv_store, index);
+    string_pair_t pair = remove_string_pair(store, index);
     kv_stats.cache_size -= (strlen(pair.key) + strlen(pair.value));
     kv_stats.num_keys -= 1;
     xfree(pair.key);
@@ -204,6 +210,27 @@ int lru_kv_delete(char* key)
 }
 
 
+int arc_kv_set(char* key, char* value)
+{
+    //
+    return 0;
+}
+
+char* arc_kv_get(char* key)
+{
+    //
+    return NULL
+}
+
+
+int arc_kv_delete(char* key)
+{
+    return 0;
+}
+
+/**
+ * Key value pair API
+ */
 
 int kv_init(replacement_policy_t policy)
 {
@@ -232,10 +259,10 @@ char* kv_get(char* key)
     switch(kv_replacement_policy)
     {
         case LRU:
-            return_value = lru_kv_get(key);
+            return_value = lru_kv_get(&lru_kv_store, key);
 
         default:
-            return_value = lru_kv_get(key);
+            return_value = lru_kv_get(&lru_kv_store, key);
     }
     if (return_value != NULL)
     {
@@ -250,11 +277,11 @@ int kv_set(char* key, char* value)
     switch(kv_replacement_policy)
     {
         case LRU:
-            return_value = lru_kv_set(key, value);
+            return_value = lru_kv_set(&lru_kv_store, key, value);
             break;
 
         default:
-            return_value = lru_kv_set(key, value);
+            return_value = lru_kv_set(&lru_kv_store, key, value);
             break;
     }
 
@@ -270,10 +297,10 @@ int kv_delete(char* key)
     switch(kv_replacement_policy)
     {
         case LRU:
-            return lru_kv_delete(key);
+            return lru_kv_delete(&lru_kv_store, key);
 
         default:
-            return lru_kv_delete(key);
+            return lru_kv_delete(&lru_kv_store, key);
     }
 }
 
