@@ -14,7 +14,7 @@ typedef struct {
     int n_entries;
 } string_pair_table_t;
 
-string_pair_table_t kv_store;
+string_pair_table_t lru_kv_store;
 
 typedef struct {
     string_pair_table_t t1;
@@ -22,14 +22,22 @@ typedef struct {
     string_pair_table_t t2;
     string_pair_table_t b2;
     int p;
+} arc_cache_t;
 
+typedef struct {
     int total_hits;
     int total_accesses;
     int total_set_success;
     int cache_size;
     int num_keys;
     int total_evictions;
-} arc_cache_t;
+} kv_stats_t;
+
+kv_stats_t kv_stats;
+
+typedef enum { LRU, ARC } replacement_policy_t;
+
+replacement_policy_t kv_replacement_policy;
 
 int kv_init();
 char* kv_get(char* key);

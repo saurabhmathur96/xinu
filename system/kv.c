@@ -24,6 +24,27 @@ void string_pair_table_init(string_pair_table_t* table, int size)
     
 }
 
+void string_pair_table_destroy(string_pair_table_t* table)
+{
+    table->size = 0;
+    table->n_entries = 0;
+    
+    int i;
+    for (i=0; i<table->size; i++)
+    {
+        if(table->entries[i].key != NULL)
+        {
+            xfree(table->entries[i].key);
+        }
+        if(table->entries[i].value != NULL)
+        {
+            xfree(table->entries[i].value);
+        }
+    }
+
+    xfree(table->entries);
+}
+
 int string_pair_table_is_full(string_pair_table_t* table)
 {
     return table->size == table->n_entries;
@@ -117,65 +138,201 @@ string_pair_t remove_string_pair(string_pair_table_t* table, int index)
         table->entries[i] = table->entries[i+1];
     }
     table->entries[i].key = NULL;
-    
+
     table->n_entries -= 1;
     
     return removed_pair;
 }
 
 
-int kv_init()
-{
-    xmalloc_init();
-    string_pair_table_init(&kv_store, KV_STORE_SIZE);
-    return 0;
-}
 
-int kv_set(char* key, char* value)
+int lru_kv_set(char* key, char* value)
 {
-    if (string_pair_table_is_full(&kv_store)) 
+    if (string_pair_table_is_full(&lru_kv_store)) 
     {
-        string_pair_t pair = remove_string_pair(&kv_store,  0);
+        string_pair_t pair = remove_string_pair(&lru_kv_store,  0);
+        kv_stats.cache_size -= (strlen(pair.key) + strlen(pair.value));
         xfree(pair.key);
         xfree(pair.value);
+        kv_stats.total_evictions++;
     }
+    
 
     // check if key is already in cache
-    int i = find_string_pair(&kv_store, key);
+    int i = find_string_pair(&lru_kv_store, key);
     if (i >= 0) 
     {
         // found => update value and set as most recently used
-        string_pair_t pair = remove_string_pair(&kv_store,  i);
+        string_pair_t pair = remove_string_pair(&lru_kv_store,  i);
+        kv_stats.cache_size += (strlen(value) - strlen(pair.value)) ;
         xfree(pair.value);
 
-        return insert_back_string_pair(&kv_store, pair.key, duplicate_string(value));
+        return insert_back_string_pair(&lru_kv_store, pair.key, duplicate_string(value));
     }
 
-    // not found
-    return insert_back_string_pair(&kv_store, duplicate_string(key), duplicate_string(value));
+    // not found 
+    kv_stats.cache_size += (strlen(key) + strlen(value));
+    kv_stats.num_keys += 1;
+    return insert_back_string_pair(&lru_kv_store, duplicate_string(key), duplicate_string(value));
 }
 
-char* kv_get(char* key)
+char* lru_kv_get(char* key)
 {
-    int target = find_string_pair(&kv_store, key);
+    int target = find_string_pair(&lru_kv_store, key);
     if (target<0)
     {
         return NULL;
     }
-    string_pair_t pair = remove_string_pair(&kv_store, target);
-    insert_back_string_pair(&kv_store, pair.key, pair.value);
+    string_pair_t pair = remove_string_pair(&lru_kv_store, target);
+    insert_back_string_pair(&lru_kv_store, pair.key, pair.value);
     return pair.value;
 }
 
-int kv_delete(char* key)
+int lru_kv_delete(char* key)
 {
-    int index = find_string_pair(&kv_store, key);
+    int index = find_string_pair(&lru_kv_store, key);
     if (index < 0)
     {
         return 0;
     }
-    string_pair_t pair = remove_string_pair(&kv_store, index);
+    string_pair_t pair = remove_string_pair(&lru_kv_store, index);
+    kv_stats.cache_size -= (strlen(pair.key) + strlen(pair.value));
+    kv_stats.num_keys -= 1;
     xfree(pair.key);
     xfree(pair.value);
     return 1;
+}
+
+
+
+int kv_init(replacement_policy_t policy)
+{
+    xmalloc_init();
+    kv_stats = (kv_stats_t) {
+        total_hit=0,
+        total_accesses=0,
+        total_set_success=0,
+        cache_size=0,
+        num_keys=0,
+        total_evictions=0
+    };
+    if (policy == LRU)
+    {
+        kv_replacement_policy = policy;
+        string_pair_table_init(&lru_kv_store, KV_STORE_SIZE);
+    }
+    return 0;
+}
+
+char* kv_get(char* key)
+{
+    kv_stats.total_accesses++;
+    
+    char* return_value;
+    switch(kv_replacement_policy)
+    {
+        case LRU:
+            return_value = lru_kv_get(key);
+
+        default:
+            return_value = lru_kv_get(key);
+    }
+    if (return_value != NULL)
+    {
+        kv_stats.total_hit++;
+    }
+    return return_value;
+}
+int kv_set(char* key, char* value)
+{
+    int return_value;
+    switch(kv_replacement_policy)
+    {
+        case LRU:
+            return_value = lru_kv_set(key, value);
+            break;
+
+        default:
+            return_value = lru_kv_get(key, value);
+            break;
+    }
+
+    if (return_value == 0)
+    {
+        kv_stats.total_set_success++;
+    }
+
+}
+int kv_delete(char* key)
+{
+    switch(kv_replacement_policy)
+    {
+        case LRU:
+            return lru_kv_delete(key);
+
+        default:
+            return lru_kv_delete(key);
+    }
+}
+
+
+char** most_popular_keys(int k)
+{
+    char** popular = xmalloc(sizeof(popular)*k);
+    int i;
+    int n_entries = lru_kv_store->n_entries;
+    if (kv_replacement_policy == LRU)
+    {
+        for(i=0; i<k; i++)
+        {
+            popular[i] = lru_kv_store->entries[n_entries-k];
+        }
+    }
+
+    return popular;
+}
+
+int get_cache_info(char* kind)
+{
+    if (0 == strncmp(kind), "total_hits", strlen("total_hits"))
+    {
+        return kv_stats.total_hits;
+    }
+    else if (0 == strncmp(kind), "total_accesses", strlen("total_accesses"))
+    {
+        return kv_stats.total_accesses;
+    }
+    else if (0 == strncmp(kind), "total_set_success", strlen("total_set_success"))
+    {
+        return kv_stats.total_set_success;
+    }
+    else if (0 == strncmp(kind), "cache_size", strlen("cache_size"))
+    {
+        return kv_stats.cache_size;
+    }
+    else if (0 == strncmp(kind), "num_keys", strlen("num_keys"))
+    {
+        return kv_stats.num_keys;
+    }
+    else if (0 == strncmp(kind), "total_evictions", strlen("total_evictions"))
+    {
+        return kv_stats.total_evictions
+    }
+    return -1;
+}
+
+void kv_reset()
+{
+    kv_stats = (kv_stats_t) {
+        total_hit=0,
+        total_accesses=0,
+        total_set_success=0,
+        cache_size=0,
+        num_keys=0,
+        total_evictions=0
+    };
+    if (kv_replacement_policy == LRU)
+    {
+        string_pair_table_destroy(&lru_kv_store);
+    }
 }
