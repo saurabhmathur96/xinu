@@ -512,7 +512,7 @@ char* kv_get(char* key)
             break;
         
         case ARC:
-            return_value = arc_kv_get(&arc_kv_store, key);
+            return_value = arc_kv_get(key);
             break;
 
         default:
@@ -532,7 +532,7 @@ int kv_set(char* key, char* value)
             break;
         
         case ARC:
-            return_value = arc_kv_set(&arc_kv_store, key, value);
+            return_value = arc_kv_set(key, value);
             break;
 
         default:
@@ -556,7 +556,7 @@ int kv_delete(char* key)
             break;
         
         case ARC:
-            return arc_kv_delete(&arc_kv_delete, key);
+            return arc_kv_delete(key);
             break;
 
         default:
