@@ -318,7 +318,7 @@ int get_cache_info(char* kind)
     }
     else if (0 == strncmp(kind, "total_evictions", strlen("total_evictions")))
     {
-        return kv_stats.total_evictions
+        return kv_stats.total_evictions;
     }
     return -1;
 }
@@ -326,7 +326,7 @@ int get_cache_info(char* kind)
 void kv_reset()
 {
     kv_stats = (kv_stats_t) {
-        .total_hit=0,
+        .total_hits=0,
         .total_accesses=0,
         .total_set_success=0,
         .cache_size=0,
