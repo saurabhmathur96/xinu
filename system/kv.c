@@ -288,7 +288,9 @@ int arc_kv_set(char* key, char* value)
 
 char* arc_kv_get(char* key)
 {
+	
     int target, delta;
+    kv_stats.total_accesses++;
     // Look for key in t2
     target = find_string_pair(&(arc_kv_store.t2), key);
     if (target >= 0)
@@ -305,6 +307,7 @@ char* arc_kv_get(char* key)
             kv_stats.total_evictions += stats.total_evictions;
         }
         insert_back_string_pair(&(arc_kv_store.t2), pair.key, pair.value);
+        kv_stats.total_hits++;
         return pair.value;
     }
 
@@ -324,6 +327,7 @@ char* arc_kv_get(char* key)
             kv_stats.total_evictions += stats.total_evictions;
         }
         insert_back_string_pair(&(arc_kv_store.t2), pair.key, pair.value);
+        kv_stats.total_hits++;
         return pair.value;
     }
 
@@ -367,7 +371,7 @@ char* arc_kv_get(char* key)
             kv_stats.total_evictions += stats.total_evictions;
         }
 
-        
+        kv_stats.total_hits++;
         return pair.value;
     }
 
@@ -409,7 +413,7 @@ char* arc_kv_get(char* key)
             lru_kv_set(&(arc_kv_store.b2), &stats, p.key, p.value);
             kv_stats.total_evictions += stats.total_evictions;
         }
-        
+        kv_stats.total_hits++;
         return pair.value;
     }
 
@@ -572,14 +576,29 @@ int kv_delete(char* key)
 char** most_popular_keys(int k)
 {
     char** popular = xmalloc(sizeof(popular)*k);
-    int i;
-    int n_entries = lru_kv_store.n_entries;
+    int i, index;
     if (kv_replacement_policy == LRU)
     {
-        for(i=0; i<k; i++)
+        int n_entries = lru_kv_store.n_entries;
+        for(i=1, index=0; index<k && i<=n_entries; i++)
         {
-            popular[i] = lru_kv_store.entries[n_entries-k].key;
+            popular[index++] = lru_kv_store.entries[n_entries-i].key;
         }
+    }
+    else if (kv_replacement_policy == ARC)
+    {
+        int n_entries;
+        n_entries  = arc_kv_store.t2.n_entries;
+        for (i=1, index=0; index<k && i<=n_entries; i++)
+        {
+            popular[index++] = arc_kv_store.t2.entries[n_entries-i].key;
+        }
+
+        n_entries  = arc_kv_store.t1.n_entries;
+        for (; index<k && i<=n_entries; i++)
+       	{
+       	    popular[index++] = arc_kv_store.t1.entries[n_entries-i].key;
+       	}
     }
 
     return popular;
