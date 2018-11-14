@@ -21,3 +21,8 @@ is a cache miss in t1, t2, b1 and b2 then NULL is returned.
 ## Design Considerations
 If a key or a value is larger than 64 bytes or 1KB respectively, an error is thrown.
 All memory comes from xmalloc and is freed using xfree.
+
+## xsh_kv.c 
+This file contains the test cases from trace_xlarge.c and can be run on the xinu prompt as 
+
+xsh $ kv
