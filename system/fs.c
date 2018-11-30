@@ -226,6 +226,24 @@ int fs_close(int fd) {
 }
 
 int fs_create(char *filename, int mode) {
+  /*
+  int i;
+  for (i=0; i<fsd.root_dir.numentries; i++)
+  {
+    if (fsd.root_dir.entry[i].inode_num == -1)
+    {
+      break;
+    }
+  }
+
+  fsd.root_dir.entries[i].inode_num = 4;
+  int n = strlen(filename);
+  if (n >= FILENAMELEN)
+  {
+    n = FILENAMELEN;
+  }
+  strncpy(fsd.root_dir.entries[i].name, filename, n);*/
+  fs_printfreemask()
   return SYSERR;
 }
 
