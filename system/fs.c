@@ -335,6 +335,8 @@ int fs_create(char *filename, int mode)
       strncpy(fsd.root_dir.entry[fsd.root_dir.numentries].name, filename, n);
       fsd.root_dir.numentries += 1;
       fsd.inodes_used += 1;
+
+      return fs_open(filename, O_RDWR);
     }
   }
 
