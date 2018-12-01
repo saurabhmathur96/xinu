@@ -355,25 +355,23 @@ int fs_read(int fd, void *buf, int nbytes)
 
 int fs_write(int fd, void *buf, int nbytes)
 {
-  printf("fd=%d\nstate=%d\n", fd, oft[fd].state);
-  int nblocks = nbytes / MDEV_BLOCK_SIZE;
-  if (nblocks * MDEV_BLOCK_SIZE != nbytes)
+  printf("block size=%d, nbytes=%d\n", block_size, nbytes);
+  int block_size = MDEV_BLOCK_SIZE;
+  int fileptr  = oft[fd].fileptr;
+  int current_block = (oft[fd].size / block_size) + 1;
+  int offset = oft[fd].size % block_size; // offset for last block
+  while (nbytes > 0)
   {
-    nblocks += 1;
+    int remaining_space = block_size - offset;
+    int bytes_to_write = (nbytes < remaining_space) ? nbytes : remaining_space;
+    bs_bwrite(dev0, oft[fd].in.blocks[current_block], offset, buf, bytes_to_write);
+    printf("wrote %d bytes\n", bytes_to_write);
+    nbytes -= bytes_to_write;
+    remaining_space = MDEV_BLOCK_SIZE;
+    offset = 0;
+    current_block += 1;
   }
 
-  int current_position = oft[fd].fileptr;
-  int offset = current_position % MDEV_BLOCK_SIZE;
-  int free_bytes = (MDEV_BLOCK_SIZE-offset);
-  int i;
-  for (i=0; i<nblocks; i++)
-  {
-    n = (remaining > free_bytes) ? free_bytes : remaining;
-    bs_bwrite(dev0, FIRST_INODE_BLOCK + NUM_INODE_BLOCKS + i, offset, MDEV_BLOCK_SIZE);
-    offset = 0;
-    free_bytes = MDEV_BLOCK_SIZE;
-    remaining -= n;
-  }
   return OK;
 }
 
