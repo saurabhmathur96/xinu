@@ -81,7 +81,7 @@ shellcmd xsh_fstest(int nargs, char *args[]) {
     
     //read the file 
     rval = fs_read(fd, buf2, rval);
-    buf2[rval] = EOF; // TODO: Write end of file symbol i.e. slash-zero instead of EOF. I can not do this because of WIKI editor limitation    
+    buf2[rval] = '\0'; // TODO: Write end of file symbol i.e. slash-zero instead of EOF. I can not do this because of WIKI editor limitation    
 
     if(rval == 0)
     {
