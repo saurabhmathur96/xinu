@@ -237,13 +237,16 @@ void fs_printfreemask(void)
 
 int fs_open(char *filename, int flags)
 {
+  intmask	mask = disable();
   if (flags > 2)
   {
+    restore(mask);
     return SYSERR;
   }
   int n = strlen(filename);
   if (n > FILENAMELEN)
   {
+    restore(mask);
     return SYSERR;
   }
   int i, j;
@@ -260,6 +263,7 @@ int fs_open(char *filename, int flags)
           if (oft[j].state == FSTATE_OPEN)
           {
             // File is already open
+            restore(mask);
             return SYSERR;
           }
         }
@@ -275,6 +279,7 @@ int fs_open(char *filename, int flags)
           fs_get_inode_by_num(dev0, fsd.root_dir.entry[i].inode_num, &in);
           oft[j] = (struct filetable) { .state = FSTATE_OPEN, .fileptr = 0, .de = &fsd.root_dir.entry[i],
                                       .in = in };
+          restore(mask);
           return j;
 
         }
@@ -282,35 +287,44 @@ int fs_open(char *filename, int flags)
     }
   }
   // File data not found
+  restore(mask);
   return SYSERR;
 }
 
 int fs_close(int fd)
 {
+  intmask	mask = disable();
   if (fd < 0 || fd >= NUM_FD)
   {
+    restore(mask);
     return SYSERR;
   }
   oft[fd].state = FSTATE_CLOSED;
   oft[fd].fileptr = 0;
+
+  restore(mask);
   return OK;
 }
 
 int fs_create(char *filename, int mode)
 {
+  intmask	mask = disable();
   if (O_CREAT != mode)
   {
+    restore(mask);
     return SYSERR;
   }
   int n = strlen(filename);
   if (n > FILENAMELEN)
   {
+    restore(mask);
     return SYSERR;
   }
 
   if (fsd.inodes_used == fsd.ninodes)
   {
     // No more inodes available
+    restore(mask);
     return SYSERR;
   }
 
@@ -320,6 +334,7 @@ int fs_create(char *filename, int mode)
     if (0 == strncmp(filename, fsd.root_dir.entry[i].name, n))
     {
       // File already exists
+      restore(mask);
       return SYSERR;
     }
   }
@@ -335,49 +350,59 @@ int fs_create(char *filename, int mode)
       strncpy(fsd.root_dir.entry[fsd.root_dir.numentries].name, filename, n);
       fsd.root_dir.numentries += 1;
       fsd.inodes_used += 1;
-
+      
+      restore(mask);
       return fs_open(filename, O_RDWR);
     }
   }
-
+  restore(mask);
   return SYSERR;
 }
 
 int fs_seek(int fd, int offset)
 {
+  intmask	mask = disable();
   if (fd >= NUM_FD || fd < 0)
   {
     // invalid fd
+    restore(mask);
     return SYSERR;
   }
   if (oft[fd].fileptr < offset)
   {
     // invalid offset
+    restore(mask);
     return SYSERR;
   }
   if (oft[fd].state != FSTATE_OPEN)
   {
     // file not open
+    restore(mask);
     return SYSERR;
   }
   oft[fd].fileptr += offset;
+  restore(mask);
   return OK;
 }
 
 int fs_read(int fd, void *buf, int nbytes)
 {
+  intmask	mask = disable();
   if (fd >= NUM_FD || fd < 0)
   {
     // invalid fd
+    restore(mask);
     return SYSERR;
   }
   if (oft[fd].state != FSTATE_OPEN)
   {
     // file not open
+    restore(mask);
     return SYSERR;
   }
   if (nbytes < 0)
   {
+    restore(mask);
     return SYSERR;
   }
   int block_size = MDEV_BLOCK_SIZE;
@@ -392,9 +417,12 @@ int fs_read(int fd, void *buf, int nbytes)
     buf += bytes_to_read;
     nbytes -= bytes_to_read;
     total_bytes_read += bytes_to_read;
+    oft[fd].fileptr += bytes_to_read;
     current_block += 1;
     offset = 0;
+    
   }
+  restore(mask);
   return total_bytes_read;
 }
 
@@ -414,18 +442,22 @@ int allocate_free_block()
 
 int fs_write(int fd, void *buf, int nbytes)
 {
+  intmask	mask = disable();
   if (fd >= NUM_FD || fd < 0)
   {
     // invalid fd
+    restore(mask);
     return SYSERR;
   }
   if (nbytes < 0)
   {
+    restore(mask);
     return SYSERR;
   } 
   if (oft[fd].state != FSTATE_OPEN)
   {
     // file not open
+    restore(mask);
     return SYSERR;
   }
   int block_size = MDEV_BLOCK_SIZE;
@@ -442,6 +474,7 @@ int fs_write(int fd, void *buf, int nbytes)
       if (block_id == -1)
       {
         // ran out of free blocks
+        restore(mask);
         return SYSERR;
       }
       oft[fd].in.blocks[current_block] = block_id;
@@ -458,7 +491,9 @@ int fs_write(int fd, void *buf, int nbytes)
     offset = 0;
     current_block += 1;
   }
-
+  oft[fd].in.size += total_bytes_written;
+  
+  restore(mask);
   return total_bytes_written;
 }
 

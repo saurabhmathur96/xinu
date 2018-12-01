@@ -1,0 +1,41 @@
+I implemented the file system as follows:
+
+## fs_open
+1. Look for an entry with given filename in root_dir. 
+2. Look up the entry's id in the file table to check if it is already open. Throw an error if already open.
+3. Find an empty space in file table and add the file's entry in that position.
+4. Return the index of file table as file descriptor.
+5.. If any of the above searches fail, an error is thrown.
+
+## fs_create
+1. Check if file already exists in root_dir and throw error if it does.
+2. Look for an empty inode in fsd.
+3. Allocate that inode to the new file and call fs_open.
+
+## fs_close
+1. Access the file table entry corresponding to the given descriptor.
+2. Set it to closed, thus marking the entry as empty.
+
+## fs_write
+1. Compute the number of blocks already written in current file.
+2. If the last block if not full start from there, otherwise allocate new block.
+3. While there is data to write, write min(block_size, remaining_bytes) in a new block.
+4. The file pointer is updated accordingly and the total number of bytes written is returned.
+
+## fs_read
+1. Compute the current block index and offset.
+2. Read the block and increment the counter for output buffer by number of bytes read.
+3. The file pointer is updated accordingly and the total number of bytes read is returned.
+
+## fs_seek
+1. Add the offset to current file's file pointer.
+
+## allocate_new_block
+1. Iterate over all possible blocks
+2. Check maskbit for each block and stop when a free block is encountered.
+3. Set the maskbit to allocated and return the block id.
+
+Lessons learned
+===============
+1. The OS needs to maintain a lot of metadata about each file.
+2. There is a lot of processing involved behind simple system calls like open.
