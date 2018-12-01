@@ -350,7 +350,22 @@ int fs_seek(int fd, int offset)
 
 int fs_read(int fd, void *buf, int nbytes)
 {
-  return SYSERR;
+  int block_size = MDEV_BLOCK_SIZE;
+  printf("block size=%d, nbytes=%d\n", block_size, nbytes);
+  int fileptr  = 0 // oft[fd].fileptr;
+  int current_block = (oft[fd].in.fileptr / block_size) + 1;
+  int total_bytes_read = 0;
+  while(nbytes > 0) {
+    int bytes_to_read = (nbytes > block_size) ? block_size : nbytes;
+    bs_bread(dev0, oft[fd].in.blocks[current_block], offset, buf, bytes_to_read);
+    printf("read %d bytes from %d\n", bytes_to_write, oft[fd].in.blocks[current_block]);
+    buf += bytes_to_read;
+    nbytes -= bytes_to_read;
+    total_bytes_read += bytes_to_read;
+    current_block += 1;
+    offset = 0;
+  }
+  return total_bytes_read;
 }
 
 int allocate_free_block()
@@ -372,7 +387,6 @@ int fs_write(int fd, void *buf, int nbytes)
   
   int block_size = MDEV_BLOCK_SIZE;
   printf("block size=%d, nbytes=%d\n", block_size, nbytes);
-  int fileptr  = oft[fd].fileptr;
   int current_block = (oft[fd].in.size / block_size) + 1;
   int offset = oft[fd].in.size % block_size; // offset for last block
   int total_bytes_written = 0;
@@ -396,6 +410,7 @@ int fs_write(int fd, void *buf, int nbytes)
     printf("wrote %d bytes to %d\n", bytes_to_write, oft[fd].in.blocks[current_block]);
     nbytes -= bytes_to_write;
     total_bytes_written += bytes_to_write;
+    oft[fd].fileptr += bytes_to_write;
     remaining_space = MDEV_BLOCK_SIZE;
     offset = 0;
     current_block += 1;
