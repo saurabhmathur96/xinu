@@ -356,7 +356,25 @@ int fs_read(int fd, void *buf, int nbytes)
 int fs_write(int fd, void *buf, int nbytes)
 {
   printf("fd=%d\nstate=%d\n", fd, oft[fd].state);
-  return SYSERR;
+  int nblocks = nbytes / MDEV_BLOCK_SIZE;
+  if (nblocks * MDEV_BLOCK_SIZE != nbytes)
+  {
+    nblocks += 1;
+  }
+
+  int current_position = oft[fd].fileptr;
+  int offset = current_position % MDEV_BLOCK_SIZE;
+  int free_bytes = (MDEV_BLOCK_SIZE-offset);
+  int i;
+  for (i=0; i<nblocks; i++)
+  {
+    n = (remaining > free_bytes) ? free_bytes : remaining;
+    bs_bwrite(dev0, FIRST_INODE_BLOCK + NUM_INODE_BLOCKS + i, offset, MDEV_BLOCK_SIZE);
+    offset = 0;
+    free_bytes = MDEV_BLOCK_SIZE;
+    remaining -= n;
+  }
+  return OK;
 }
 
 #endif /* FS */
