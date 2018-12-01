@@ -268,7 +268,7 @@ int fs_open(char *filename, int flags)
       // Create entry in file table
       for (j = 0; j < NUM_FD; j++)
       {
-        if (oft[j].state == FSTATE_CLOSE)
+        if (oft[j].state == FSTATE_CLOSED)
         {
           // unused row found
           struct inode in;
@@ -291,7 +291,7 @@ int fs_close(int fd)
   {
     return SYSERR;
   }
-  oft[fd].state = FSTATE_CLOSE;
+  oft[fd].state = FSTATE_CLOSED;
   oft[fd].fileptr = 0;
   return OK;
 }
