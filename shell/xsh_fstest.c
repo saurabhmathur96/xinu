@@ -5,7 +5,7 @@
 #include <fs.h>
 #define SIZE 1200
 
-// void fs_testbitmask(void);
+void fs_testbitmask(void);
 
 /**
  * @ingroup shell
