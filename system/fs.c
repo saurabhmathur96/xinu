@@ -273,7 +273,7 @@ int fs_open(char *filename, int flags)
           // unused row found
           struct inode in;
           fs_get_inode_by_num(dev0, fsd.root_dir.entry[i].inode_num, &in);
-          oft[j] = (struct filetable) { .state = FS_OPEN, .fileptr = 0, .de = &fsd.root_dir.entry[i],
+          oft[j] = (struct filetable) { .state = FSTATE_OPEN, .fileptr = 0, .de = &fsd.root_dir.entry[i],
                                       .in = in };
           return j;
 
