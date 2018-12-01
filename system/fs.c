@@ -353,7 +353,7 @@ int fs_read(int fd, void *buf, int nbytes)
   return SYSERR;
 }
 
-int get_free_block()
+int allocate_free_block()
 {
   int i;
   for (i=0; i<MDEV_NUM_BLOCKS; i++)
@@ -361,6 +361,7 @@ int get_free_block()
     if (0 == fs_getmaskbit(i))
     {
       return i;
+      fs_setmaskbit(i);
     }
   }
   return -1;
@@ -380,7 +381,7 @@ int fs_write(int fd, void *buf, int nbytes)
     if (offset == 0)
     {
       // allocate new block
-      int block_id = get_free_block();
+      int block_id = allocate_free_block();
       if (block_id == -1)
       {
         // ran out of free blocks
