@@ -360,7 +360,8 @@ int fs_seek(int fd, int offset)
     // file not open
     return SYSERR;
   }
-  oft[fd].fileptr -= offset;
+  oft[fd].fileptr += offset;
+  return OK;
 }
 
 int fs_read(int fd, void *buf, int nbytes)
