@@ -360,8 +360,8 @@ int allocate_free_block()
   {
     if (0 == fs_getmaskbit(i))
     {
-      return i;
       fs_setmaskbit(i);
+      return i;
     }
   }
   return -1;
