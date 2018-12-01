@@ -352,13 +352,14 @@ int fs_read(int fd, void *buf, int nbytes)
 {
   int block_size = MDEV_BLOCK_SIZE;
   printf("block size=%d, nbytes=%d\n", block_size, nbytes);
-  int fileptr  = 0 // oft[fd].fileptr;
+  oft[fd].fileptr = 0;
   int current_block = (oft[fd].in.fileptr / block_size) + 1;
   int total_bytes_read = 0;
+  int offset = oft[fd].in.fileptr % block_size;
   while(nbytes > 0) {
     int bytes_to_read = (nbytes > block_size) ? block_size : nbytes;
     bs_bread(dev0, oft[fd].in.blocks[current_block], offset, buf, bytes_to_read);
-    printf("read %d bytes from %d\n", bytes_to_write, oft[fd].in.blocks[current_block]);
+    printf("read %d bytes from %d\n", bytes_to_read, oft[fd].in.blocks[current_block]);
     buf += bytes_to_read;
     nbytes -= bytes_to_read;
     total_bytes_read += bytes_to_read;
