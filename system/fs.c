@@ -250,14 +250,14 @@ int fs_open(char *filename, int flags)
   // for each file in root directory
   for (i = 0; i < fsd.root_dir.numentries; i++)
   {
-    if (0 == strcmp(fsd.root_dir.entry[i].name, filename, n))
+    if (0 == strncmp(fsd.root_dir.entry[i].name, filename, n))
     {
       // for each entry in file table
       for (j = 0; j < NUM_FD; j++)
       {
         if (oft[j].in.id == fsd.root_dir.entry[i].inode_num)
         {
-          if (oft[j].state == FS_OPEN)
+          if (oft[j].state == FSTATE_OPEN)
           {
             // File is already open
             return SYSERR;
@@ -268,19 +268,21 @@ int fs_open(char *filename, int flags)
       // Create entry in file table
       for (j = 0; j < NUM_FD; j++)
       {
-        if (oft[j].state == FS_CLOSE)
+        if (oft[j].state == FSTATE_CLOSE)
         {
           // unused row found
           struct inode in;
           fs_get_inode_by_num(dev0, fsd.root_dir.entry[i].inode_num, &in);
           oft[j] = (struct filetable) { .state = FS_OPEN, .fileptr = 0, .de = &fsd.root_dir.entry[i],
-                                      .in = in, .mode = flags };
+                                      .in = in };
           return j;
 
         }
       }
     }
   }
+  // File data not found
+  return SYSERR;
 }
 
 int fs_close(int fd)
@@ -289,7 +291,7 @@ int fs_close(int fd)
   {
     return SYSERR;
   }
-  oft[fd].state = FS_CLOSE;
+  oft[fd].state = FSTATE_CLOSE;
   oft[fd].fileptr = 0;
   return OK;
 }
