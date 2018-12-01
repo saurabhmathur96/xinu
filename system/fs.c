@@ -345,14 +345,42 @@ int fs_create(char *filename, int mode)
 
 int fs_seek(int fd, int offset)
 {
-  return SYSERR;
+  if (fd >= NUM_FD || fd < 0)
+  {
+    // invalid fd
+    return SYSERR;
+  }
+  if (oft[fd].fileptr < offset)
+  {
+    // invalid offset
+    return SYSERR;
+  }
+  if (oft[fd].state != FSTATE_OPEN)
+  {
+    // file not open
+    return SYSERR;
+  }
+  oft[fd].fileptr -= offset;
 }
 
 int fs_read(int fd, void *buf, int nbytes)
 {
+  if (fd >= NUM_FD || fd < 0)
+  {
+    // invalid fd
+    return SYSERR;
+  }
+  if (oft[fd].state != FSTATE_OPEN)
+  {
+    // file not open
+    return SYSERR;
+  }
+  if (nbytes < 0)
+  {
+    return SYSERR;
+  }
   int block_size = MDEV_BLOCK_SIZE;
   printf("block size=%d, nbytes=%d\n", block_size, nbytes);
-  oft[fd].fileptr = 0;
   int current_block = (oft[fd].fileptr / block_size) + 1;
   int total_bytes_read = 0;
   int offset = oft[fd].fileptr % block_size;
@@ -385,7 +413,20 @@ int allocate_free_block()
 
 int fs_write(int fd, void *buf, int nbytes)
 {
-  
+  if (fd >= NUM_FD || fd < 0)
+  {
+    // invalid fd
+    return SYSERR;
+  }
+  if (nbytes < 0)
+  {
+    return SYSERR;
+  } 
+  if (oft[fd].state != FSTATE_OPEN)
+  {
+    // file not open
+    return SYSERR;
+  }
   int block_size = MDEV_BLOCK_SIZE;
   printf("block size=%d, nbytes=%d\n", block_size, nbytes);
   int current_block = (oft[fd].in.size / block_size) + 1;
