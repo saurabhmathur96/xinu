@@ -355,11 +355,12 @@ int fs_read(int fd, void *buf, int nbytes)
 
 int fs_write(int fd, void *buf, int nbytes)
 {
-  printf("block size=%d, nbytes=%d\n", block_size, nbytes);
+  
   int block_size = MDEV_BLOCK_SIZE;
+  printf("block size=%d, nbytes=%d\n", block_size, nbytes);
   int fileptr  = oft[fd].fileptr;
-  int current_block = (oft[fd].size / block_size) + 1;
-  int offset = oft[fd].size % block_size; // offset for last block
+  int current_block = (oft[fd].in.size / block_size) + 1;
+  int offset = oft[fd].in.size % block_size; // offset for last block
   while (nbytes > 0)
   {
     int remaining_space = block_size - offset;
