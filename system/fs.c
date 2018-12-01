@@ -353,6 +353,19 @@ int fs_read(int fd, void *buf, int nbytes)
   return SYSERR;
 }
 
+int get_free_block()
+{
+  int i;
+  for (i=0; i<MDEV_NUM_BLOCKS; i++)
+  {
+    if (0 == fs_getmaskbit(i))
+    {
+      return i;
+    }
+  }
+  return -1;
+}
+
 int fs_write(int fd, void *buf, int nbytes)
 {
   
@@ -361,19 +374,33 @@ int fs_write(int fd, void *buf, int nbytes)
   int fileptr  = oft[fd].fileptr;
   int current_block = (oft[fd].in.size / block_size) + 1;
   int offset = oft[fd].in.size % block_size; // offset for last block
+  int total_bytes_written = 0;
   while (nbytes > 0)
   {
+    if (offset == 0)
+    {
+      // allocate new block
+      int block_id = get_free_block();
+      if (block_id == -1)
+      {
+        // ran out of free blocks
+        return SYSERR;
+      }
+      oft[fd].in.blocks[current_block] = block_id;
+    }
     int remaining_space = block_size - offset;
     int bytes_to_write = (nbytes < remaining_space) ? nbytes : remaining_space;
+    
     bs_bwrite(dev0, oft[fd].in.blocks[current_block], offset, buf, bytes_to_write);
-    printf("wrote %d bytes\n", bytes_to_write);
+    printf("wrote %d bytes to %d\n", bytes_to_write, oft[fd].in.blocks[current_block]);
     nbytes -= bytes_to_write;
+    total_bytes_written += bytes_to_write;
     remaining_space = MDEV_BLOCK_SIZE;
     offset = 0;
     current_block += 1;
   }
 
-  return OK;
+  return total_bytes_written;
 }
 
 #endif /* FS */
