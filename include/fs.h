@@ -20,6 +20,7 @@
 
 #define INODE_TYPE_FILE 1
 #define INODE_TYPE_DIR 2
+#define INODE_TYPE_EMPTY 0
 
 /* Structure of inode*/
 struct inode {

@@ -226,6 +226,50 @@ int fs_close(int fd) {
 }
 
 int fs_create(char *filename, int mode) {
+  if (O_CREAT != mode)
+  {
+    return SYSERR;
+  }
+  int n = strlen(filename);
+  if (n > FILENAMELEN)
+  {
+    return SYSERR;
+  }
+
+  if (fsd.inodes_used == fsd,ninodes)
+  {
+    // No more inodes available
+    return SYSERR;
+  }
+
+  int i;
+  for (i=0; i<fsd.root_dir.numentries; i++)
+  {
+    if (0==strncmp(filename, fsd.root_dir.entry[i].name, n))
+    {
+      // File already exists
+      return SYSERR;
+    }
+  }
+
+  struct inode in;
+  for (i=0; i<fsd.ninodes; i++)
+  {
+    fs_get_inode_by_num(dev0, i, &in);
+    if (in.type == INODE_TYPE_EMPTY)
+    {
+      in = (struct inode) { .id = i, .type = INODE_TYPE_FILE, .nlink = 0,
+                          .device = dev0, .size = 0 };
+      fsd.root_dir.entry[fsd.root_dir.numentries].inode_num = i;
+      strncpy(fsd.root_dir.entry[fsd.root_dir.numentries].name, filename, n);
+      fsd.root_dir.numentries += 1;
+      fsd.inodes_used += 1;
+    }
+  }
+
+  return SYSERR;
+  
+
   /*
   int i;
   for (i=0; i<fsd.root_dir.numentries; i++)
@@ -243,7 +287,7 @@ int fs_create(char *filename, int mode) {
     n = FILENAMELEN;
   }
   strncpy(fsd.root_dir.entries[i].name, filename, n);*/
-  fs_printfreemask()
+  fs_printfreemask();
   return SYSERR;
 }
 
